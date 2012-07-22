@@ -1,0 +1,35 @@
+/* _base.typography.scss */
+
+.josefin {
+	font-family: 'Josefin Slab', "Times New Roman", Times, serif;
+}
+
+.font-josefin {
+	@extend .josefin;
+	font-weight: 400;
+}
+
+.font-josefin-italic {
+	@extend .font-josefin;
+	font-style: italic;
+}
+
+.font-josefin-semi-bold {
+	@extend .josefin;
+	font-weight: 600;
+}
+
+.font-josefin-semi-bold-italic {
+	@extend .font-josefin-semi-bold;
+	font-style: italic;
+}
+
+.font-josefin-bold {
+	@extend .josefin;
+	font-weight: 700;
+}
+
+.font-josefin-bold-italic {
+	@extend .font-josefin-bold;
+	font-style: italic;
+}

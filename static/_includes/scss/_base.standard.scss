@@ -1,0 +1,60 @@
+/* _base.standard.scss */
+html { 
+	background: url('../img/wood-bg.jpg') no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+#main {
+	width: 840px;
+	margin: 80px auto 0;
+	height: 620px;
+	position: relative;
+}
+
+.card {
+	width: 388px;
+	height: 608px;
+	display: block;
+	background: url('../img/card-bg.png') no-repeat scroll 0 0;
+	position: absolute;
+
+	&.yours {
+		top: 0;
+		left: 0;
+	}
+
+	&.theirs {
+		top: 0;
+		right: -8px;
+	}
+
+	.portrait {
+		margin-top: 31px;
+		margin-left: 102px;
+	}
+}
+
+#flip-token {
+	background: url('../img/flip-token-bg.png') no-repeat scroll 0 0;
+	width: 182px;
+	height: 182px;
+	position: absolute;
+	top: 110px;
+	left: 331px;
+	z-index: 2;
+
+	span {
+		@extend .font-josefin-semi-bold;
+		font-size: 124px;
+		width: 100%;
+		text-align: center;
+		line-height: 124px;
+		padding-top: 10px;
+		letter-spacing: -8px;
+		margin-left: -6px;
+		display: block;
+	}
+}
