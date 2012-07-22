@@ -7,6 +7,10 @@ var GoogleSpreadsheets = require("node-google-spreadsheets"),
     cheerio = require('cheerio'),
     wTrumps = {}; //Main object
 
+/**
+* Get all the weblebrities
+* Connect from 
+**/
 wTrumps.getWeblebrities = function(callback){
   winston.info('Loading Weblebrities');
   
@@ -60,6 +64,9 @@ wTrumps.getWeblebrities = function(callback){
   });
 };
 
+/**
+* Get Twitter followers -> Using API. (https://api.twitter.com/1/users/lookup.json) 
+**/
 wTrumps.getTwitterFollows = function(callback){
   winston.info('Getting twitter followers');  
   
@@ -86,6 +93,9 @@ wTrumps.getTwitterFollows = function(callback){
       });
 }
 
+/**
+* Get LinkedIn Connections -> Using page crawler.
+**/
 wTrumps.getLinkedInConnections = function(callback){
 
   winston.info('Getting linkedin connections'); 
@@ -115,6 +125,113 @@ wTrumps.getLinkedInConnections = function(callback){
   });
 }
 
+/**
+* Get Github Repos count -> Using api (https://api.github.com/users/)
+**/
+wTrumps.getGithubRepos = function(callback){
+
+  winston.info('Getting Github repos'); 
+
+  var reqQueue = async.queue(function(task, callback){
+
+      request({url:task.url, json:true}, function(error, response, body){
+        if (!error && response.statusCode == 200) {
+          wTrumps.updateWeblebrityStat(task.github, 'github', body.public_repos);
+          callback();
+        }
+      });
+  }, 10);
+
+  reqQueue.drain = function(){
+    callback(null);
+  };
+
+  _.each(wTrumps.weblebrities, function(weblebrity){
+    
+    if(!_.isEmpty(weblebrity.accounts.github) && !_.isUndefined(weblebrity.accounts.github)){
+        var task = {};
+        task.url = 'https://api.github.com/users/'+weblebrity.accounts.github;
+        task.github = weblebrity.accounts.github;
+        reqQueue.push(task);
+    }
+  });
+}
+
+/**
+* Get Lanyrd Conferences Spoken -> Using page crawler (http://lanyrd.com/profile/[name]).
+**/
+wTrumps.getLanyrdConferenceSpoken = function(callback){
+
+  winston.info('Getting lanyrd conferences spoken'); 
+
+  var reqQueue = async.queue(function(task, callback){
+
+      request(task.url, function(error, response, body){
+        if (!error && response.statusCode == 200) {
+          var $ = cheerio.load(body);
+          
+          wTrumps.updateWeblebrityStat(task.lanyrd, 'lanyrd', $($('p.number-feature a strong')[0]).text());
+           callback();
+        }
+      });
+  }, 10);
+
+  reqQueue.drain = function(){
+    callback(null);
+  };
+
+  _.each(wTrumps.weblebrities, function(weblebrity){
+    
+    if(!_.isEmpty(weblebrity.accounts.lanyrd) && !_.isUndefined(weblebrity.accounts.lanyrd)){
+        var task = {};
+        task.url = 'http://lanyrd.com/profile/'+weblebrity.accounts.lanyrd;
+        task.lanyrd = weblebrity.accounts.lanyrd;
+        reqQueue.push(task);
+    }
+  });
+}
+
+wTrumps.getFacebookFriends = function(callback){
+
+  winston.info('Getting Facebook Friends'); 
+
+    //get token first
+    request('https://graph.facebook.com/oauth/access_token?client_id=345866462155145&client_secret=4f7cb4c988000af7b5ee825f833a1818&grant_type=client_credentials', function(error, response, body){
+      var accessToken = body;
+
+      var reqQueue = async.queue(function(task, callback){
+
+          request({url:task.url, json:true}, function(error, response, body){
+            console.log(body);
+            if (!error && response.statusCode == 200) {
+              console.log(body);
+              // wTrumps.updateWeblebrityStat(task.facebook, 'facebook', body.public_repos);
+              callback();
+            }
+          });
+      }, 10);
+
+      reqQueue.drain = function(){
+        callback(null);
+      };
+
+      _.each(wTrumps.weblebrities, function(weblebrity){
+        
+        if(!_.isEmpty(weblebrity.accounts.facebook) && !_.isUndefined(weblebrity.accounts.facebook)){
+            var task = {};
+            task.url = 'https://graph.facebook.com/'+weblebrity.accounts.facebook+'/friends?'+accessToken;
+            console.log(task.url);
+            task.github = weblebrity.accounts.facebook;
+            reqQueue.push(task);
+        }
+      });
+    });
+}
+
+/**
+* Set stats for weblebrities
+* params: accountName (username/url for service), type (twitter, github etc), value (value for service)
+**/
 wTrumps.updateWeblebrityStat = function(accountName, type, value){
 
   _.each(wTrumps.weblebrities, function(item, index){
@@ -130,7 +247,10 @@ wTrumps.updateWeblebrityStat = function(accountName, type, value){
 async.series([
     wTrumps.getWeblebrities,
     wTrumps.getTwitterFollows,
-    wTrumps.getLinkedInConnections
+    wTrumps.getLinkedInConnections,
+    wTrumps.getGithubRepos,
+    wTrumps.getLanyrdConferenceSpoken,
+    wTrumps.getFacebookFriends
   ], function(){
     console.log('READY');
     console.log(wTrumps.weblebrities);
