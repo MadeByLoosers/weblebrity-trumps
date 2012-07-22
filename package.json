@@ -4,10 +4,12 @@
   "description": "A site to compare Weblebrities based on social media and internt proliferation.",
   "main": "app.js",
   "dependencies": {
-    "node-google-spreadsheets": "~0.0.3",
     "underscore": "~1.3.3",
     "winston": "~0.6.1"
   },
+  "bundleDependencies": [
+    "node-google-spreadsheets"
+  ],
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
