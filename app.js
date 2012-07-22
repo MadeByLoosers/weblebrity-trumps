@@ -4,6 +4,7 @@ var GoogleSpreadsheets = require("node-google-spreadsheets"),
     async = require('async'),
     _ = require('underscore'),
     winston = require('winston'),
+    cheerio = require('cheerio'),
     wTrumps = {}; //Main object
 
 wTrumps.getWeblebrities = function(callback){
@@ -85,6 +86,35 @@ wTrumps.getTwitterFollows = function(callback){
       });
 }
 
+wTrumps.getLinkedInConnections = function(callback){
+
+  winston.info('Getting linkedin connections'); 
+
+  var reqQueue = async.queue(function(task, callback){
+
+      request(task.url, function(error, response, body){
+        if (!error && response.statusCode == 200) {
+          var $ = cheerio.load(body);
+          wTrumps.updateWeblebrityStat(task.url, 'linkedin', $('dd.overview-connections strong').text());
+           callback();
+        }
+      });
+  }, 10);
+
+  reqQueue.drain = function(){
+    callback(null);
+  };
+
+  _.each(wTrumps.weblebrities, function(weblebrity){
+    
+    if(!_.isEmpty(weblebrity.accounts.linkedin) && !_.isUndefined(weblebrity.accounts.linkedin)){
+        var task = {};
+        task.url = weblebrity.accounts.linkedin;
+        reqQueue.push(task);
+    }
+  });
+}
+
 wTrumps.updateWeblebrityStat = function(accountName, type, value){
 
   _.each(wTrumps.weblebrities, function(item, index){
@@ -99,8 +129,10 @@ wTrumps.updateWeblebrityStat = function(accountName, type, value){
 //Entry
 async.series([
     wTrumps.getWeblebrities,
-    wTrumps.getTwitterFollows
+    wTrumps.getTwitterFollows,
+    wTrumps.getLinkedInConnections
   ], function(){
     console.log('READY');
+    console.log(wTrumps.weblebrities);
   })
 
