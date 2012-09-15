@@ -250,12 +250,16 @@ html {
   height: 620px;
   position: relative; }
 
+.player {
+  float:left;
+  width: 388px;
+}
 .card {
   width: 388px;
   height: 608px;
   display: block;
   background: url("../img/card-bg.png") no-repeat scroll 0 0;
-  position: absolute; }
+  }
   .card.yours {
     top: 0;
     left: 0; }
@@ -377,3 +381,9 @@ html {
 
   h2, h3 {
     page-break-after: avoid; } }
+
+header{
+  position: fixed;
+  height: 40px;
+  
+}    
