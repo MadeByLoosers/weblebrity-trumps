@@ -31,7 +31,7 @@ wTrumps.getWeblebrities = function(callback){
 
               var weblebrity = {
                 id : item.id,
-                name : item.name,
+                name : item.Name,
                 accounts: {
                   twitter: item.Twitter,
                   linkedin: item.LinkedIn,

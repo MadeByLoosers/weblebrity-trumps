@@ -1,6 +1,7 @@
 [
     {
         "id": 0,
+        "name": "Paul Irish",
         "accounts": {
             "twitter": "paul_irish",
             "linkedin": "http://www.linkedin.com/in/paulirish",
@@ -18,6 +19,7 @@
     },
     {
         "id": 1,
+        "name": "Ryan Carson",
         "accounts": {
             "twitter": "ryancarson",
             "linkedin": "http://uk.linkedin.com/in/ryancarson",
@@ -26,7 +28,7 @@
             "facebook": "ryancarson"
         },
         "stats": {
-            "twitter": 41342,
+            "twitter": 41343,
             "linkedin": "500+",
             "github": 9,
             "lanyrd": "6",
@@ -35,6 +37,7 @@
     },
     {
         "id": 2,
+        "name": "Addy Osmani",
         "accounts": {
             "twitter": "addyosmani",
             "linkedin": "http://uk.linkedin.com/in/osmani",
@@ -52,6 +55,7 @@
     },
     {
         "id": 3,
+        "name": "Ryan Dahl",
         "accounts": {
             "twitter": "ryah",
             "linkedin": "",
@@ -69,6 +73,7 @@
     },
     {
         "id": 4,
+        "name": "Mark Zuckerberg",
         "accounts": {
             "twitter": "finkd",
             "linkedin": "",
@@ -77,7 +82,7 @@
             "facebook": "zuck"
         },
         "stats": {
-            "twitter": 183072,
+            "twitter": 183073,
             "linkedin": 0,
             "github": 0,
             "lanyrd": "14",
@@ -86,6 +91,7 @@
     },
     {
         "id": 5,
+        "name": "David Heinemeier Hansson",
         "accounts": {
             "twitter": "dhh",
             "linkedin": "",
@@ -94,7 +100,7 @@
             "facebook": ""
         },
         "stats": {
-            "twitter": 63612,
+            "twitter": 63614,
             "linkedin": 0,
             "github": 13,
             "lanyrd": "22",
@@ -103,6 +109,7 @@
     },
     {
         "id": 6,
+        "name": "Dries Buytaert",
         "accounts": {
             "twitter": "Dries",
             "linkedin": "http://www.linkedin.com/in/buytaert",
@@ -120,6 +127,7 @@
     },
     {
         "id": 7,
+        "name": "Matt Mullenweg",
         "accounts": {
             "twitter": "photomatt",
             "linkedin": "http://www.linkedin.com/in/mattm",
@@ -128,7 +136,7 @@
             "facebook": "matt.mullenweg"
         },
         "stats": {
-            "twitter": 44712,
+            "twitter": 44710,
             "linkedin": "210",
             "github": 0,
             "lanyrd": "37",
@@ -137,6 +145,7 @@
     },
     {
         "id": 8,
+        "name": "Seb Lee-Delisle",
         "accounts": {
             "twitter": "seb_ly",
             "linkedin": "http://uk.linkedin.com/in/sebleedelisle",
@@ -154,6 +163,7 @@
     },
     {
         "id": 9,
+        "name": "Remy Sharp",
         "accounts": {
             "twitter": "rem",
             "linkedin": "http://uk.linkedin.com/in/remysharp",
@@ -162,7 +172,7 @@
             "facebook": "100000293257841"
         },
         "stats": {
-            "twitter": 23254,
+            "twitter": 23253,
             "linkedin": "213",
             "github": 68,
             "lanyrd": "51",
@@ -171,6 +181,7 @@
     },
     {
         "id": 10,
+        "name": "Aral Balkan",
         "accounts": {
             "twitter": "aral",
             "linkedin": "",
@@ -188,6 +199,7 @@
     },
     {
         "id": 11,
+        "name": "Tom (My Space)",
         "accounts": {
             "twitter": "",
             "linkedin": "",
