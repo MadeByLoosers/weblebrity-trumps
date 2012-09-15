@@ -45,7 +45,7 @@ WT.init = function(){
 		WT.player2.cards = _.rest(WT.weblebrities, cardsEach);
 
 		WT.startRound(WT.currentPlayer);
-
+		WT.updateScores();
 		
 	});
 };
@@ -89,8 +89,8 @@ WT.compareCards = function(stat){
 	var winner,
 		draw = false;
 
-	var player1Value = WT.player1.cards[0].stats[stat];
-	var player2Value = WT.player2.cards[0].stats[stat];
+	var player1Value = parseInt(WT.player1.cards[0].stats[stat]);
+	var player2Value = parseInt(WT.player2.cards[0].stats[stat]);
 
 	//Just incase we need different comparitors.
 	switch(stat){
@@ -109,13 +109,15 @@ WT.compareCards = function(stat){
 			}
 	}
 
+	console.log(player1Value , player2Value);
+
 	if(draw){
-		$('header').html('Draw');
+		$('header .message').html('Draw');
     	WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
     	WT.player2.cards.push(WT.player2.cards.shift());
     	winner = WT.currentPlayer;
 	}else{		
-		$('header').html('Winner: '+winner.name);
+		$('header .message').html('Winner: '+winner.name);
 		if(winner === WT.player1){
 			WT.player1.cards.push(WT.player1.cards.shift());
 			WT.player1.cards.push(WT.player2.cards.shift());
@@ -127,29 +129,53 @@ WT.compareCards = function(stat){
 
 	WT.currentPlayer = winner;
 	
+	WT.updateScores();
+
+	if(WT.player1.cards.length <= 0 && WT.player2.cards.length <= 0){
+		WT.endGame();
+	}else{
+		WT.countdownToNewRound();
+	}
+	
+};
+
+WT.countdownToNewRound = function(){
+	
 	//Countdown to new round
 	var count = 0;
 	var interVal = setInterval(function(){
 		
 		count++;
 
-		if(count > 15){
+		if(count > 10){
 			clearInterval(interVal);
 			console.log('starting new round');
 			WT.startRound();
-		}else if(count > 10){
+		}else if(count > 5){
 
-			$('header').html('starting new round in '+  (16 -count));
+			$('header .message').html('starting new round in '+  (11 -count));
 		}
 	}, 1000);
-	
-};
+}
+
+WT.updateScores = function(){
+	$('header .score').html(WT.player1.cards.length + ' v ' + WT.player2.cards.length);
+}
+
+WT.endGame = function(){
+
+	if(WT.player1.cards.length <= 0){
+		$('header .message').html('Player 2 is the winner!');
+	}else{
+		$('header .message').html('Player 1 is the winner!');
+	}
+}
 
 WT.debugCards = function(){
 	_.each(WT.player1.cards, function(card){
 		console.log(card.name);
 	});
-	console.log('----------------')
+	console.log('----------------');
 	_.each(WT.player2.cards, function(card){
 		console.log(card.name);
 	});
