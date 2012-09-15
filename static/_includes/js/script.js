@@ -3,6 +3,11 @@
 */
 
 var WT = WT || {};
+WT.settings = {
+	roundTimeout: 5, //seconds between rounds,
+	debug: true
+}
+
 WT.weblebrities = [];
 WT.player1 = { name: 'Player1', cards: [], el: $('#player1')};
 WT.player2 = { name: 'Player2', cards: [], el: $('#player2')};
@@ -109,7 +114,8 @@ WT.compareCards = function(stat){
 			}
 	}
 
-	console.log(player1Value , player2Value);
+	if(WT.settings.debug)
+		console.log('Player 1: '+ player1Value , 'Player 2: '+ player2Value);
 
 	if(draw){
 		$('header .message').html('Draw');
@@ -127,6 +133,9 @@ WT.compareCards = function(stat){
 		}
 	}
 
+	if(WT.settings.debug)
+		console.log('Winner: ' + winner.name);
+
 	WT.currentPlayer = winner;
 	
 	WT.updateScores();
@@ -142,18 +151,23 @@ WT.compareCards = function(stat){
 WT.countdownToNewRound = function(){
 	
 	//Countdown to new round
-	var count = 0;
+	var count = 0,
+		timeout = WT.settings.roundTimeout;
+
 	var interVal = setInterval(function(){
 		
 		count++;
 
-		if(count > 10){
+		if(count > timeout){
 			clearInterval(interVal);
-			console.log('starting new round');
+			if(WT.settings.debug){
+				console.log('starting new round');
+				WT.debugCards();
+			}
 			WT.startRound();
-		}else if(count > 5){
+		}else if(count > timeout - 5){
 
-			$('header .message').html('starting new round in '+  (11 -count));
+			$('header .message').html('starting new round in '+  ((timeout+1) - count));
 		}
 	}, 1000);
 }
@@ -172,11 +186,21 @@ WT.endGame = function(){
 }
 
 WT.debugCards = function(){
-	_.each(WT.player1.cards, function(card){
-		console.log(card.name);
-	});
-	console.log('----------------');
-	_.each(WT.player2.cards, function(card){
-		console.log(card.name);
-	});
+
+	if(WT.settings.debug){
+		console.log('***** CARDS DUMP *****');
+		console.log('----------------');
+		console.log('Player 1: ' + WT.player1.cards.length + ' cards.');
+		console.log('----------------');
+		_.each(WT.player1.cards, function(card){
+			console.log(card.name);
+		});
+		console.log('----------------');
+		console.log('Player 2: ' + WT.player2.cards.length + ' cards.');
+		console.log('----------------');
+		_.each(WT.player2.cards, function(card){
+			console.log(card.name);
+		});
+		console.log('***** CARDS DUMP END *****');
+	}
 }
