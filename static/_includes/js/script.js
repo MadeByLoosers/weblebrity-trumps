@@ -58,7 +58,6 @@ WT.showCard = function(player){
 		var stat = {name: key, value: value};
 		output.find('dl').append(_.template(WT.statTemplate, stat));
 	});
-	console.log(player.el);
 	player.el.append(output);
 	
 };
@@ -67,8 +66,9 @@ WT.startRound = function(player){
 
 	player.el.find('dl dt, dl dd').on('click', function(e){
 		var stat = $(this).attr('data-stat');
-		WT.compareCards(stat);
 		WT.showCard(WT.player2);
+		WT.compareCards(stat);
+		
 	});
 };
 
@@ -79,7 +79,8 @@ WT.compareCards = function(stat){
 
 	var player1Value = WT.player1.cards[0].stats[stat];
 	var player2Value = WT.player2.cards[0].stats[stat];
-	
+
+	//Just incase we need different comparitors.
 	switch(stat){
 		case 'twitter':
 		case 'linkedin':
@@ -96,6 +97,47 @@ WT.compareCards = function(stat){
 			}
 	}
 
-	$('header').html('Winner: '+winner.name);
+	if(draw){
+		$('header').html('Draw');
+    	WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
+    	WT.player2.cards.push(WT.player2.cards.shift());
+	}else{		
+		$('header').html('Winner: '+winner.name);
+		if(winner === WT.player1){
+			WT.player1.cards.push(WT.player1.cards.shift());
+			WT.player1.cards.push(WT.player2.cards.shift());
+		}else{
+			WT.player2.cards.push(WT.player2.cards.shift());
+			WT.player2.cards.push(WT.player1.cards.shift());
+		}
+	}
+
+
+	
+
+	//Countdown to new round
+	var count = 0;
+	var interVal = setInterval(function(){
+		
+		count++;
+
+		if(count > 15){
+			clearInterval(interVal);
+			console.log('starting new round');
+		}else if(count > 10){
+
+			$('header').html('starting new round in '+  (16 -count));
+		}
+	}, 1000);
 	
 };
+
+WT.debugCards = function(){
+	_.each(WT.player1.cards, function(card){
+		console.log(card.name);
+	});
+	console.log('----------------')
+	_.each(WT.player2.cards, function(card){
+		console.log(card.name);
+	});
+}
