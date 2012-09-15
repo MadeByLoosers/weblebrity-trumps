@@ -8,6 +8,7 @@ WT.player1 = { name: 'Player1', cards: [], el: $('#player1')};
 WT.player2 = { name: 'Player2', cards: [], el: $('#player2')};
 WT.cardTemplate = '<div class="card"><h2><%= name %></h2><dl></dl></div>';
 WT.statTemplate = '<dt data-stat="<%= name %>"><%= name %></dt><dd data-stat="<%= name %>"><%= value %><dd>';
+WT.currentPlayer = WT.player1;
 
 $(document).ready(function () {
 
@@ -43,8 +44,9 @@ WT.init = function(){
 		WT.player1.cards = _.first(WT.weblebrities, cardsEach);
 		WT.player2.cards = _.rest(WT.weblebrities, cardsEach);
 
-		WT.showCard(WT.player1);
-		WT.startRound(WT.player1);
+		WT.startRound(WT.currentPlayer);
+
+		
 	});
 };
 
@@ -62,11 +64,21 @@ WT.showCard = function(player){
 	
 };
 
-WT.startRound = function(player){
+WT.startRound = function(){
+
+	$('.card').remove();
+	var player = WT.currentPlayer;
+	WT.showCard(player);
 
 	player.el.find('dl dt, dl dd').on('click', function(e){
 		var stat = $(this).attr('data-stat');
-		WT.showCard(WT.player2);
+
+		//Show other players card
+		if(player === WT.player1){
+			WT.showCard(WT.player2);
+		}else{
+			WT.showCard(WT.player1);
+		}
 		WT.compareCards(stat);
 		
 	});
@@ -101,6 +113,7 @@ WT.compareCards = function(stat){
 		$('header').html('Draw');
     	WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
     	WT.player2.cards.push(WT.player2.cards.shift());
+    	winner = WT.currentPlayer;
 	}else{		
 		$('header').html('Winner: '+winner.name);
 		if(winner === WT.player1){
@@ -112,9 +125,8 @@ WT.compareCards = function(stat){
 		}
 	}
 
-
+	WT.currentPlayer = winner;
 	
-
 	//Countdown to new round
 	var count = 0;
 	var interVal = setInterval(function(){
@@ -124,6 +136,7 @@ WT.compareCards = function(stat){
 		if(count > 15){
 			clearInterval(interVal);
 			console.log('starting new round');
+			WT.startRound();
 		}else if(count > 10){
 
 			$('header').html('starting new round in '+  (16 -count));
