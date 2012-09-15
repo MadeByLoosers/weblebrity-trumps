@@ -9,8 +9,8 @@ WT.settings = {
 }
 
 WT.weblebrities = [];
-WT.player1 = { name: 'Player1', cards: [], el: $('#player1')};
-WT.player2 = { name: 'Player2', cards: [], el: $('#player2')};
+WT.player1 = { name: 'Player1', cards: [], el: $('#player1'), isAI:false};
+WT.player2 = { name: 'Player2', cards: [], el: $('#player2'), isAI:true};
 WT.cardTemplate = '<div class="card"><h2><%= name %></h2><dl></dl></div>';
 WT.statTemplate = '<dt data-stat="<%= name %>"><%= name %></dt><dd data-stat="<%= name %>"><%= value %><dd>';
 WT.currentPlayer = WT.player1;
@@ -65,8 +65,25 @@ WT.showCard = function(player){
 		var stat = {name: key, value: value};
 		output.find('dl').append(_.template(WT.statTemplate, stat));
 	});
+
 	player.el.append(output);
+
+
 	
+};
+
+WT.makeAIChoice = function(){
+	
+	var choices = _.clone(WT.currentPlayer.cards[0].stats);
+	var result;
+    var count = 0;
+    for (var prop in choices)
+        if (Math.random() < 1/++count)
+           result = prop;
+    
+	
+	WT.compareCards(result);
+
 };
 
 WT.startRound = function(){
@@ -75,18 +92,21 @@ WT.startRound = function(){
 	var player = WT.currentPlayer;
 	WT.showCard(player);
 
-	player.el.find('dl dt, dl dd').on('click', function(e){
-		var stat = $(this).attr('data-stat');
+	if(player.isAI){
+		setTimeout(WT.makeAIChoice, 1000);
+	}else{
+		player.el.find('dl dt, dl dd').on('click', function(e){
+			var stat = $(this).attr('data-stat');
 
-		//Show other players card
-		if(player === WT.player1){
-			WT.showCard(WT.player2);
-		}else{
-			WT.showCard(WT.player1);
-		}
-		WT.compareCards(stat);
-		
-	});
+			//Show other players card
+			if(player === WT.player1){
+				WT.showCard(WT.player2);
+			}else{
+				WT.showCard(WT.player1);
+			}
+			WT.compareCards(stat);	
+		});
+	}
 };
 
 WT.compareCards = function(stat){
