@@ -1,6 +1,6 @@
 /* _base.standard.scss */
 html { 
-	background: url('../img/wood-bg.jpg') no-repeat center center fixed; 
+	
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -9,6 +9,8 @@ html {
 
 body {
 	@extend .font-josefin-semi-bold;
+	background-color:#222222;
+	color:#fff;
 }
 
 h2 {
@@ -111,4 +113,56 @@ h2 {
 		margin-left: -6px;
 		display: block;
 	}
+}
+
+header {
+	height: 174px;
+	width: 100%;	
+	margin:0 auto;
+	position: relative;
+	background: url('../img/top_grad.jpg') no-repeat center top;
+
+		a, a:visited {
+			@extend .font-josefin-bold-italic;
+			color:#fff;
+			text-decoration: none;
+		}
+
+		.headerinner{
+
+			width: 720px;
+			margin: 0 auto;
+			clear: both;
+			overflow: hidden;
+		
+			.lockup {
+				width: 161px;
+				height: 143px;
+				padding-top: 30px;
+				float: left;
+
+			}
+
+			.header-cta {
+				float: left;
+				width: 240px;
+				padding: 50px 5px 0;
+
+				&.wtf {
+					text-align: right;
+				}
+
+				&.suggest {
+					text-align: left;
+				}
+			}
+		}
+
+
+	
+}
+
+
+#main {
+	
 }

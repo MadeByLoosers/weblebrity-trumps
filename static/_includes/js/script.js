@@ -127,7 +127,7 @@ WT.showCard = function(player){
 
 	var card = player.cards[0];
 
-	var output = $(_.template(WT.templates.cardTemplate, {name: card.name}));
+	var output = $(_.template(WT.templates.cardTemplate, {name: card.name, twitterName: card.accounts.twitter }));
 
 	_.each(card.stats, function(value, key){
 		var stat = {name: key, value: value};
@@ -189,12 +189,12 @@ WT.compareCards = function(stat){
 		console.log('Player 1: '+ player1Value , 'Player 2: '+ player2Value);
 
 	if(draw){
-		$('header .message').html('Draw');
+		// $('header .message').html('Draw');
     	WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
     	WT.player2.cards.push(WT.player2.cards.shift());
     	winner = WT.currentPlayer;
 	}else{		
-		$('header .message').html('Winner: '+winner.name);
+		// $('header .message').html('Winner: '+winner.name);
 		if(winner === WT.player1){
 			WT.player1.cards.push(WT.player1.cards.shift());
 			WT.player1.cards.push(WT.player2.cards.shift());
@@ -241,7 +241,7 @@ WT.countdownToNewRound = function(){
 			WT.startRound();
 		}else if(count > timeout - 5){
 
-			$('header .message').html('starting new round in '+  ((timeout+1) - count));
+			// $('header .message').html('starting new round in '+  ((timeout+1) - count));
 		}
 	}, 1000);
 }
@@ -250,7 +250,7 @@ WT.countdownToNewRound = function(){
 * Update scores
 */
 WT.updateScores = function(){
-	$('header .score').html(WT.player1.cards.length + ' v ' + WT.player2.cards.length);
+	// $('header .score').html(WT.player1.cards.length + ' v ' + WT.player2.cards.length);
 }
 
 /**
@@ -258,11 +258,11 @@ WT.updateScores = function(){
 */
 WT.endGame = function(){
 
-	if(WT.player1.cards.length <= 0){
-		$('header .message').html('Player 2 is the winner!');
-	}else{
-		$('header .message').html('Player 1 is the winner!');
-	}
+	// if(WT.player1.cards.length <= 0){
+	// 	$('header .message').html('Player 2 is the winner!');
+	// }else{
+	// 	$('header .message').html('Player 1 is the winner!');
+	// }
 }
 /**
 * Debug trace out cards quickly
