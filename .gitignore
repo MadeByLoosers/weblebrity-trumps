@@ -11,6 +11,8 @@ pids
 logs
 results
 
+.sass-cache
+
 node_modules/*
 !node_modules/node-google-spreadsheets
 node_modules/node-google-spreadsheets/node_modules/*
