@@ -17,6 +17,7 @@ WT.templates.startTemplate = '<div id="start" class="big-circle">' +
 								'</div>' + 
 							'</div>';
 
-WT.templates.playerTemplate = '<div class="player" id="player<%= number %>"></div>';
-WT.templates.cardTemplate = '<div class="card"><h2><%= name %></h2><img src="https://api.twitter.com/1/users/profile_image?screen_name=<%= twitterName %>&size=original" height="160px"><dl></dl></div>';
+WT.templates.playerTemplate = '<div class="player" id="player<%= number %>"><div class="card"></div></div>';
+WT.templates.cardFront = '<div class="card-front"><h2><%= name %></h2><img src="https://api.twitter.com/1/users/profile_image?screen_name=<%= twitterName %>&size=original" height="160px"><dl></dl></div>';
+WT.templates.cardBack = '<div class="card-back">CARD BACK</div>';
 WT.templates.statTemplate = '<dt data-stat="<%= name %>"><%= name %></dt><dd data-stat="<%= name %>"><%= value %><dd>';
