@@ -7,8 +7,11 @@ html {
 	background-size: cover;
 }
 
-h2 {
+body {
 	@extend .font-josefin-semi-bold;
+}
+
+h2 {
 	font-size: 70px;
 	width: 100%;
 	text-align: center;
