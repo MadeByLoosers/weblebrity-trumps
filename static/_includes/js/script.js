@@ -118,8 +118,8 @@ WT.startRound = function(){
 			
 			$playerStats.off('click');
 
-			var stat = parseInt($(this).find('.stat-val').text(), 10);
-
+			var stat = $(this).find('.stat').text();
+			
 			//Show other players card
 			if(player === WT.player1){
 				WT.showCardFront(WT.player2);
@@ -156,6 +156,9 @@ WT.updateInfoCircle = function(state){
 		case 'draw':
 			content = 'Draw';
 			break;	
+		case 'score':
+			WT.player1.cards
+			content = WT.player1.cards.length + ' v ' + WT.player2.cards.length
 	}
 
 	WT.infoCircle.html(content);
@@ -187,7 +190,6 @@ WT.showCardFront = function(player){
 
 WT.showCardBack = function(player){
 
-	console.log(player.el);
 	player.el.append(WT.templates.cardBack);
 }
 
@@ -212,7 +214,7 @@ WT.makeAIChoice = function(){
 * Compare card values to see who wins
 */
 WT.compareCards = function(stat){
-
+	
 	var winner,
 		draw = false;
 
@@ -236,6 +238,7 @@ WT.compareCards = function(stat){
 			}
 	}
 
+
 	if(WT.settings.debug)
 		console.log('Player 1: '+ player1Value , 'Player 2: '+ player2Value);
 
@@ -256,15 +259,13 @@ WT.compareCards = function(stat){
 			WT.player2.cards.push(WT.player1.cards.shift());
 		}
 	}
-
+	
 	if(WT.settings.debug)
 		console.log('Winner: ' + winner.name);
 
 	WT.currentPlayer = winner;
 
-
-	
-	WT.updateScores();
+	setTimeout(WT.updateInfoCircle('score'), 1000);
 
 	if(WT.player1.cards.length <= 0 && WT.player2.cards.length <= 0){
 		WT.endGame();
