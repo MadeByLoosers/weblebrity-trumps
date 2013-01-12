@@ -11,6 +11,7 @@
 	padding: 30px 8px 35px 8px;
 	display: block;
 	background: #fff no-repeat scroll 0 0;
+	height: 530px;
 
 	.portrait {
 		margin-top: 31px;
@@ -32,6 +33,10 @@
 
 	img {
     	margin-left: 22px;
+    	border-color: #fff;
+    	-webkit-border-radius: 8px;
+		-moz-border-radius: 8px;
+		border-radius: 8px;
 	}
 
 	ul {
@@ -66,6 +71,32 @@
 				right: 0;
 			}
 
+		}
+	}
+
+	.card-back {
+		background: url('../img/card-back.jpg') no-repeat scroll 0 0;
+		width: 340px;
+		height: 530px;
+		display: block;
+		margin-left: 12px;
+
+		p {
+			padding: 0;
+			margin: 0;
+			position: absolute;
+			color: black;
+			font-size: 28px;
+			top: 580px;
+			width: 336px;
+			text-align: center;
+			text-transform: uppercase;
+
+			font-size: 32px;
+			top: 580px;
+			width: 336px;
+			text-align: center;
+			line-height: 34px;
 		}
 	}
 }
