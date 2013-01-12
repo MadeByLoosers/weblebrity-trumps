@@ -5,6 +5,7 @@ var GoogleSpreadsheets = require("node-google-spreadsheets"),
     _ = require('underscore'),
     winston = require('winston'),
     cheerio = require('cheerio'),
+    fs = require('fs'),
     wTrumps = {}; //Main object
 
 /**
@@ -14,33 +15,29 @@ var GoogleSpreadsheets = require("node-google-spreadsheets"),
 wTrumps.getWeblebrities = function(callback){
   winston.info('Loading Weblebrities');
   
-  GoogleSpreadsheets({
+  fs.readFile('data/weblebrities.json', 'utf8', function(err, data){
+    
+    if(!err){
       
-      key: "0ApZCKMWuuiAVdFc5cWpnSGpQSi1qMnpRZUU4c2t3Y3c"
+      var weblebrities = [];
 
-  }, function(err, spreadsheet) {
-
-      spreadsheet.worksheets[0].cells({
-
-          range: "A2:G100" //@todo: can we get row count value from API?
-
-      }, function(err, cells) {
-
-          var weblebrities = [];
+      var json = JSON.parse(data);
           
-          _.each(_.keys(cells.cells), function(item){
+          _.each(_.keys(json), function(index){
 
-            if(!_.isUndefined(item) && !_.isEmpty(item) && !_.isUndefined(cells.cells[item][1]) && !_.isUndefined(cells.cells[item][2])){
+            var item = json[index];
+
+            if(!_.isUndefined(item) && !_.isEmpty(item)){
 
               var weblebrity = {
-                id : cells.cells[item]['1'].value,
-                name : cells.cells[item]['2'].value,
+                id : item.id,
+                name : item.Name,
                 accounts: {
-                  twitter: (!_.isUndefined(cells.cells[item]['3'])) ? cells.cells[item]['3'].value : null,
-                  linkedin: (!_.isUndefined(cells.cells[item]['4'])) ? cells.cells[item]['4'].value : null,
-                  github: (!_.isUndefined(cells.cells[item]['5'])) ? cells.cells[item]['5'].value : null,
-                  lanyrd: (!_.isUndefined(cells.cells[item]['6'])) ? cells.cells[item]['6'].value : null,
-                  facebook: (!_.isUndefined(cells.cells[item]['7'])) ? cells.cells[item]['7'].value : null
+                  twitter: item.Twitter,
+                  linkedin: item.LinkedIn,
+                  github: item.Github,
+                  lanyrd: item.Lanyrd,
+                  facebook: item.Facebook
                 },
                 stats: {
                   twitter: 0,
@@ -59,9 +56,9 @@ wTrumps.getWeblebrities = function(callback){
           wTrumps.weblebrities = weblebrities;  
           winston.info(weblebrities.length +  ' Weblebrities loaded');  
           callback(null);
-      });
-    
-  });
+
+    }
+  })
 };
 
 /**
@@ -73,12 +70,13 @@ wTrumps.getTwitterFollows = function(callback){
   var names = [];
     _.each(wTrumps.weblebrities, function(weblebrity){
 
-      names.push(weblebrity.accounts.twitter);
+      if(weblebrity.accounts.twitter != '')
+        names.push(weblebrity.accounts.twitter);
 
     });
 
-      // var url = "https://api.twitter.com/1/users/lookup.json?screen_name="+names.join(',');
-      var url = "http://192.168.1.77/~alice/twitter.json";
+    var url = "https://api.twitter.com/1/users/lookup.json?screen_name="+names.join(',');
+      //var url = "http://localhost/twitter.json";
 
       //@todo: Request can only handle 100 users. Maybe split into multiple requests if too long here.
 
@@ -221,7 +219,7 @@ wTrumps.getFacebookFriends = function(callback){
             var task = {};
             task.url = 'https://graph.facebook.com/'+weblebrity.accounts.facebook+'/friends?'+accessToken;
             console.log(task.url);
-            task.github = weblebrity.accounts.facebook;
+            task.facebook = weblebrity.accounts.facebook;
             reqQueue.push(task);
         }
       });
@@ -250,9 +248,12 @@ async.series([
     wTrumps.getLinkedInConnections,
     wTrumps.getGithubRepos,
     wTrumps.getLanyrdConferenceSpoken,
-    wTrumps.getFacebookFriends
+    // wTrumps.getFacebookFriends,
   ], function(){
     console.log('READY');
+    fs.writeFile('static/weblebrities.json', JSON.stringify(wTrumps.weblebrities), function(err){
+      console.log('SAVED');
+    });
     console.log(wTrumps.weblebrities);
   })
 
