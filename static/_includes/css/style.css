@@ -69,7 +69,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #cccccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -86,7 +86,7 @@ mark {
 
 pre, code, kbd, samp {
   font-family: monospace, serif;
-  _font-family: 'courier new', monospace;
+  _font-family: "courier new", monospace;
   font-size: 1em; }
 
 pre {
@@ -216,7 +216,7 @@ td {
 
 /* _base.typography.scss */
 .josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited, .card h2 {
-  font-family: 'Josefin Slab', "Times New Roman", Times, serif; }
+  font-family: "Josefin Slab", "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
   font-weight: 400; }
@@ -350,7 +350,6 @@ header {
       header .headerinner .header-cta.suggest {
         text-align: left; }
 
-<<<<<<< HEAD
 #main {
   width: 910px;
   margin: 35px auto 50px; }
@@ -361,7 +360,7 @@ header {
       margin-right: 70px; }
     #main .player#player2 {
       margin-left: 70px; }
-=======
+
 .big-circle {
   width: 666px;
   height: 528px;
@@ -415,7 +414,7 @@ header {
       margin: 0 0 10px 0;
       padding: 0;
       font-size: 14px; }
-    .big-circle .controls .player {
+    .big-circle .controls .button {
       width: 181px;
       height: 47px;
       display: block;
@@ -427,13 +426,12 @@ header {
       text-decoration: none;
       color: #000;
       padding-top: 5px; }
-      .big-circle .controls .player.first {
+      .big-circle .controls .button.first {
         margin-right: 20px; }
   .big-circle .social {
     text-align: center; }
     .big-circle .social p {
       margin-bottom: 0; }
->>>>>>> c5520f19c5a5a8d6068b57dc981eca4ac8712500
 
 .card {
   -moz-border-radius: 10px;
@@ -527,7 +525,7 @@ header {
     content: ""; }
 
   pre, blockquote {
-    border: 1px solid #999;
+    border: 1px solid #999999;
     page-break-inside: avoid; }
 
   thead {

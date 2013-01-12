@@ -7,8 +7,8 @@ WT.templates.startTemplate = '<div id="start" class="big-circle">' +
 								'<p>Using the who’s who on the webasphere, Weblebritiy Trumps allows you to play Using the who’s who on the webasphere, Weblebritiy Trumps allows you to play</p>' + 
 								'<div class="controls">' + 
 									'<h3>Play</h3>' + 
-									'<a href="" class="player first" data-players="1">1 Player</a>' +
-									'<a href="" class="player" data-players="2">VS</a>' + 
+									'<a href="" class="button first" data-players="1">1 Player</a>' +
+									'<a href="" class="button" data-players="2">VS</a>' + 
 								'</div>' + 
 								'<div class="social">' + 
 									'<p>This is a Gunt London Production</p>' + 
