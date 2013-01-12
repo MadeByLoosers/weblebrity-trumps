@@ -104,7 +104,9 @@ WT.startRound = function(){
 		setTimeout(WT.makeAIChoice, 1000);
 	}else{
 
-		player.el.find('dl dt, dl dd').on('click', function(e){
+		var $playerStats = player.el.find('dl dt, dl dd');
+		$playerStats.on('click', function(e){
+			$playerStats.off('click');
 			var stat = $(this).attr('data-stat');
 
 			//Show other players card
