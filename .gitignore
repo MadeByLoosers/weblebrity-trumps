@@ -17,3 +17,5 @@ node_modules/*
 !node_modules/node-google-spreadsheets
 node_modules/node-google-spreadsheets/node_modules/*
 npm-debug.log
+/static/_includes/*.db
+Thumbs.db
