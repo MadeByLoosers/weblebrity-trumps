@@ -8,8 +8,111 @@ html {
 }
 
 body {
+	@extend .font-josefin-semi-bold;
 	background-color:#222222;
 	color:#fff;
+}
+
+h2 {
+	font-size: 70px;
+	width: 100%;
+	text-align: center;
+}
+
+#main {
+	width: 840px;
+	margin: 80px auto 0;
+	height: 620px;
+	position: relative;
+}
+
+.card {
+	width: 388px;
+	height: 608px;
+	display: block;
+	background: url('../img/card-bg.png') no-repeat scroll 0 0;
+	position: absolute;
+
+	&.yours {
+		top: 0;
+		left: 0;
+	}
+
+	&.theirs {
+		top: 0;
+		right: -8px;
+	}
+
+	.portrait {
+		margin-top: 31px;
+		margin-left: 102px;
+	}
+
+	h2 {
+		width: 100%;
+		text-align: center;
+		margin: 0;
+		font-size: 30px;
+		line-height: 31px;
+		margin-top: 23px;
+		text-transform: uppercase;
+	}
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0 22px;
+
+		li {
+			float: left;
+			clear: both;
+
+			a {
+				margin: 0;
+				padding: 0;
+				smargin: 15px 10px;
+				padding: 16px 0;
+				margin: 0;
+				border-top: 1px solid #bababa;
+				border-bottom: 1px solid #bababa;
+				float: left;
+				clear: both;
+
+				&:hover {
+					background-color: #fb889b;
+					margin: 0;
+					border-top: 2px solid #bababa;
+					border-bottom: 2px solid #bababa;
+
+				}
+			}
+		}
+	}
+}
+
+#flip-token {
+	background: url('../img/flip-token-bg.png') no-repeat scroll 0 0;
+	width: 182px;
+	height: 182px;
+	position: absolute;
+	top: 110px;
+	left: 331px;
+	z-index: 2;
+	// -moz-box-shadow: 5px 5px 5px 10px #ccc;
+	// -webkit-box-shadow: 5px 5px 5px 10px #ccc;
+	// box-shadow: 5px 5px 5px 10px #ccc;
+
+	span {
+		@extend .font-josefin-semi-bold;
+		font-size: 124px;
+		width: 100%;
+		text-align: center;
+		line-height: 124px;
+		padding-top: 10px;
+		letter-spacing: -8px;
+		margin-left: -6px;
+		display: block;
+	}
 }
 
 header {
