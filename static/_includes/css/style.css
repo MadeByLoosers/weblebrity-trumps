@@ -215,7 +215,7 @@ td {
   padding: 0.2em 0; }
 
 /* _base.typography.scss */
-.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic {
+.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, h2, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic {
   font-family: 'Josefin Slab', "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
@@ -224,7 +224,7 @@ td {
 .font-josefin-italic {
   font-style: italic; }
 
-.font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span {
+.font-josefin-semi-bold, .font-josefin-semi-bold-italic, h2, #flip-token span {
   font-weight: 600; }
 
 .font-josefin-semi-bold-italic {
@@ -243,6 +243,11 @@ html {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+
+h2 {
+  font-size: 70px;
+  width: 100%;
+  text-align: center; }
 
 #main {
   width: 840px;
@@ -265,6 +270,36 @@ html {
   .card .portrait {
     margin-top: 31px;
     margin-left: 102px; }
+  .card h2 {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-size: 30px;
+    line-height: 31px;
+    margin-top: 23px;
+    text-transform: uppercase; }
+  .card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0 22px; }
+    .card ul li {
+      float: left;
+      clear: both; }
+      .card ul li a {
+        margin: 0;
+        padding: 0;
+        smargin: 15px 10px;
+        padding: 16px 0;
+        margin: 0;
+        border-top: 1px solid #bababa;
+        border-bottom: 1px solid #bababa;
+        float: left;
+        clear: both; }
+        .card ul li a:hover {
+          background-color: #fb889b;
+          margin: 0;
+          border-top: 2px solid #bababa;
+          border-bottom: 2px solid #bababa; }
 
 #flip-token {
   background: url("../img/flip-token-bg.png") no-repeat scroll 0 0;
