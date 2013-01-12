@@ -7,8 +7,8 @@
     -khtml-border-radius: $cornerRadius;
     border-radius: $cornerRadius;
 
-	width: 370px;
-	padding: 35px 10px 35px 8px;
+	width: 364px;
+	padding: 30px 8px 35px 8px;
 	display: block;
 	background: #fff no-repeat scroll 0 0;
 
@@ -17,18 +17,55 @@
 		margin-left: 102px;
 	}
 
-
 	h2 {
 		@extend .font-josefin-bold;
 		text-transform: uppercase;
 		color:#000;
-		font-size: 40px;
+		font-size: 38px;
 		text-align: center;
 		width: 100%;
 		margin: 0;
+		padding: 0;
+		line-height: 40px;
+		margin-bottom: 10px;
 	}
 
-	dl {
-		color:#000;
+	img {
+    	margin-left: 22px;
+	}
+
+	ul {
+		color: #000;
+		margin: 26px 20px 0 20px;
+		padding: 0;
+		list-style: none;
+		float: left;
+
+		li {
+			border-bottom: 1px solid #ccc;
+			float: left;
+			clear: both;
+			width: 320px;
+			height: 39px;
+			position: relative;
+			cursor: pointer;
+
+			&:hover {
+				background-color: #f2b235;
+				padding: 0 12px;
+				width: 296px;
+			}
+
+			span {
+				position: absolute;
+				top: 6px;
+				font-size: 19px;
+			}
+
+			.stat-val {
+				right: 0;
+			}
+
+		}
 	}
 }

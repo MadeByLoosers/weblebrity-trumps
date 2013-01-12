@@ -112,13 +112,13 @@ WT.startRound = function(){
 		setTimeout(WT.makeAIChoice, 1000);
 	}else{
 
-		var $playerStats = player.el.find('dl dt, dl dd');
+		var $playerStats = player.el.find('li');
 
 		$playerStats.on('click', function(e){
 			
 			$playerStats.off('click');
 
-			var stat = $(this).attr('data-stat');
+			var stat = parseInt($(this).find('.stat-val').text(), 10);
 
 			//Show other players card
 			if(player === WT.player1){
@@ -175,7 +175,7 @@ WT.showCardFront = function(player){
 
 	_.each(card.stats, function(value, key){
 		var stat = {name: key, value: value};
-		output.find('dl').append(_.template(WT.templates.statTemplate, stat));
+		output.find('ul').append(_.template(WT.templates.statTemplate, stat));
 	});
 	
 

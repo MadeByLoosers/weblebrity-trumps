@@ -69,7 +69,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -86,7 +86,7 @@ mark {
 
 pre, code, kbd, samp {
   font-family: monospace, serif;
-  _font-family: "courier new", monospace;
+  _font-family: 'courier new', monospace;
   font-size: 1em; }
 
 pre {
@@ -216,7 +216,7 @@ td {
 
 /* _base.typography.scss */
 .josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited, .card h2 {
-  font-family: "Josefin Slab", "Times New Roman", Times, serif; }
+  font-family: 'Josefin Slab', "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
   font-weight: 400; }
@@ -368,22 +368,49 @@ header {
   -webkit-border-radius: 10px;
   -khtml-border-radius: 10px;
   border-radius: 10px;
-  width: 370px;
-  padding: 35px 10px 35px 8px;
+  width: 364px;
+  padding: 30px 8px 35px 8px;
   display: block;
-  background: white no-repeat scroll 0 0; }
+  background: #fff no-repeat scroll 0 0; }
   .card .portrait {
     margin-top: 31px;
     margin-left: 102px; }
   .card h2 {
     text-transform: uppercase;
     color: #000;
-    font-size: 40px;
+    font-size: 38px;
     text-align: center;
     width: 100%;
-    margin: 0; }
-  .card dl {
-    color: #000; }
+    margin: 0;
+    padding: 0;
+    line-height: 40px;
+    margin-bottom: 10px; }
+  .card img {
+    margin-left: 22px; }
+  .card ul {
+    color: #000;
+    margin: 26px 20px 0 20px;
+    padding: 0;
+    list-style: none;
+    float: left; }
+    .card ul li {
+      border-bottom: 1px solid #ccc;
+      float: left;
+      clear: both;
+      width: 320px;
+      height: 39px;
+      position: relative;
+      cursor: pointer; }
+      .card ul li:hover {
+        background-color: #f2b235;
+        padding: 0 12px;
+        width: 296px; }
+      .card ul li span {
+        position: absolute;
+        top: 6px;
+        font-size: 19px; }
+      .card ul li .stat-val {
+        right: 0; }
 
 /* _base.html5bp.mobile.scss */
 .ir {
@@ -457,7 +484,7 @@ header {
     content: ""; }
 
   pre, blockquote {
-    border: 1px solid #999999;
+    border: 1px solid #999;
     page-break-inside: avoid; }
 
   thead {
