@@ -1,5 +1,5 @@
- /* Author:
-
+ /* Author: 
+	Matt [at] Gunt
 */
 
 var WT = WT || {};
@@ -8,38 +8,24 @@ WT.settings = {
 	debug: true
 }
 
+//Stuff for later
 WT.weblebrities = [];
 WT.$mainEl = {};
 WT.player1 = { name: 'Player1', cards: [], el: {}, isAI:false };
 WT.player2 = { name: 'Player2', cards: [], el: {}, isAI:true };
-WT.cardTemplate = '<div class="card"><h2><%= name %></h2><dl></dl></div>';
-WT.statTemplate = '<dt data-stat="<%= name %>"><%= name %></dt><dd data-stat="<%= name %>"><%= value %><dd>';
+
+//Always start with first player
 WT.currentPlayer = WT.player1;
 
 $(document).ready(function () {
 
-	// //get a reference to the canvas
-	// var ctx = $('#flip-coin')[0].getContext("2d");
-
-	// console.log('ctx', ctx);
-	 
-	// //draw a circle
-	// ctx.beginPath();
-	// ctx.arc(75, 75, 50, 0, Math.PI*8, true); 
-	// ctx.closePath();
-	// ctx.fill();
-
-
-	// setInterval(function () {
-
-	// 	// do some flipping
-
-	// 	//$('#flip-coin').
-
-	// });
+	//GO!
 	WT.init();
 });
 
+/**
+* Start here. Load card data.
+*/
 WT.init = function(){
 
 	WT.$mainEl = $('#main');
@@ -54,18 +40,25 @@ WT.init = function(){
 	});
 };
 
+/**
+* Ask the user if its one or two players
+* Setup players
+*/
 WT.setUpGame = function(){
 
 	//Present player choice		
-	WT.$mainEl.append(WT.templates.startTemplate);
+	var $start = $(WT.templates.startTemplate);
+	WT.$mainEl.append($start);
+
 	WT.$mainEl.on('click', '.player', function(event){
 
 		event.preventDefault();
+		WT.$mainEl.off('click');
 
+		//What player did we click on?
 		var data = $(this).data();
 
 		//Update Player objects
-
 		if(data.players === 1){
 			WT.player2.isAI = true;
 		}else if(data.players === 2){
@@ -76,12 +69,14 @@ WT.setUpGame = function(){
 		}
 
 		//Add player divs
-		$('#start').remove();
-		WT.$mainEl.append(_.template(WT.templates.playerTemplate, {number:1}));
-		WT.$mainEl.append(_.template(WT.templates.playerTemplate, {number:2}));
+		$start.remove();
+		var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1}));
+		var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2}));
+		WT.$mainEl.append($playerOneEl);
+		WT.$mainEl.append($playerTwoEl);
 
-		WT.player1.el = $('#player1');
-		WT.player2.el = $('#player2');
+		WT.player1.el = $playerOneEl;
+		WT.player2.el = $playerTwoEl;
 
 		//Divide up cards
 		WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
@@ -95,37 +90,9 @@ WT.setUpGame = function(){
 	
 }
 
-WT.showCard = function(player){
-
-	var card = player.cards[0];
-
-	var output = $(_.template(WT.cardTemplate, {name: card.name}));
-
-	_.each(card.stats, function(value, key){
-		var stat = {name: key, value: value};
-		output.find('dl').append(_.template(WT.statTemplate, stat));
-	});
-
-	player.el.append(output);
-
-
-	
-};
-
-WT.makeAIChoice = function(){
-	
-	var choices = _.clone(WT.currentPlayer.cards[0].stats);
-	var result;
-    var count = 0;
-    for (var prop in choices)
-        if (Math.random() < 1/++count)
-           result = prop;
-    
-	
-	WT.compareCards(result);
-
-};
-
+/**
+* Start a game Round
+*/
 WT.startRound = function(){
 
 	$('.card').remove();
@@ -133,8 +100,10 @@ WT.startRound = function(){
 	WT.showCard(player);
 
 	if(player.isAI){
+		//Make a choice
 		setTimeout(WT.makeAIChoice, 1000);
 	}else{
+
 		player.el.find('dl dt, dl dd').on('click', function(e){
 			var stat = $(this).attr('data-stat');
 
@@ -149,6 +118,48 @@ WT.startRound = function(){
 	}
 };
 
+
+
+/**
+* Display a card
+*/ 
+WT.showCard = function(player){
+
+	var card = player.cards[0];
+
+	var output = $(_.template(WT.templates.cardTemplate, {name: card.name}));
+
+	_.each(card.stats, function(value, key){
+		var stat = {name: key, value: value};
+		output.find('dl').append(_.template(WT.templates.statTemplate, stat));
+	});
+
+	player.el.append(output);
+
+
+	
+};
+
+/**
+* Make a random choice for the AI
+*/
+WT.makeAIChoice = function(){
+	
+	var choices = _.clone(WT.currentPlayer.cards[0].stats);
+	var result;
+    var count = 0;
+    for (var prop in choices)
+        if (Math.random() < 1/++count)
+           result = prop;
+    
+	
+	WT.compareCards(result);
+
+};
+
+/**
+* Compare card values to see who wins
+*/
 WT.compareCards = function(stat){
 
 	var winner,
@@ -208,6 +219,9 @@ WT.compareCards = function(stat){
 	
 };
 
+/*
+* Countdown to the next round
+*/
 WT.countdownToNewRound = function(){
 	
 	//Countdown to new round
@@ -232,10 +246,16 @@ WT.countdownToNewRound = function(){
 	}, 1000);
 }
 
+/**
+* Update scores
+*/
 WT.updateScores = function(){
 	$('header .score').html(WT.player1.cards.length + ' v ' + WT.player2.cards.length);
 }
 
+/**
+* 
+*/
 WT.endGame = function(){
 
 	if(WT.player1.cards.length <= 0){
@@ -244,7 +264,9 @@ WT.endGame = function(){
 		$('header .message').html('Player 1 is the winner!');
 	}
 }
-
+/**
+* Debug trace out cards quickly
+*/
 WT.debugCards = function(){
 
 	if(WT.settings.debug){
