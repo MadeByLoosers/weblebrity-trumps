@@ -13,6 +13,7 @@ WT.weblebrities = [];
 WT.$mainEl = {};
 WT.player1 = { name: 'Player1', cards: [], el: {}, isAI:false };
 WT.player2 = { name: 'Player2', cards: [], el: {}, isAI:true };
+WT.players = [WT.player1, WT.player2];
 
 //Always start with first player
 WT.currentPlayer = WT.player1;
@@ -75,8 +76,8 @@ WT.setUpGame = function(){
 		WT.$mainEl.append($playerOneEl);
 		WT.$mainEl.append($playerTwoEl);
 
-		WT.player1.el = $playerOneEl;
-		WT.player2.el = $playerTwoEl;
+		WT.player1.el = $playerOneEl.find('.card');
+		WT.player2.el = $playerTwoEl.find('.card');
 
 		//Divide up cards
 		WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
@@ -95,23 +96,31 @@ WT.setUpGame = function(){
 */
 WT.startRound = function(){
 
-	$('.card').remove();
+
 	var player = WT.currentPlayer;
-	WT.showCard(player);
+	WT.showCardFront(player);
+
+	var nonPlayer = WT.getNonPlayingPlayer();
+	WT.showCardBack(nonPlayer);
 
 	if(player.isAI){
 		//Make a choice
 		setTimeout(WT.makeAIChoice, 1000);
 	}else{
 
-		player.el.find('li').on('click', function(e){
+		var $playerStats = player.el.find('li');
+
+		$playerStats.on('click', function(e){
+			
+			$playerStats.off('click');
+
 			var stat = parseInt($(this).find('.stat-val').text(), 10);
 
 			//Show other players card
 			if(player === WT.player1){
-				WT.showCard(WT.player2);
+				WT.showCardFront(WT.player2);
 			}else{
-				WT.showCard(WT.player1);
+				WT.showCardFront(WT.player1);
 			}
 			WT.compareCards(stat);	
 		});
@@ -123,22 +132,32 @@ WT.startRound = function(){
 /**
 * Display a card
 */ 
-WT.showCard = function(player){
+WT.showCardFront = function(player){
+
+	
+	player.el.find('.card-back').remove();
 
 	var card = player.cards[0];
 
-	var output = $(_.template(WT.templates.cardTemplate, {name: card.name, twitterName: card.accounts.twitter }));
+	var output = $(_.template(WT.templates.cardFront, {name: card.name, twitterName: card.accounts.twitter }));
 
 	_.each(card.stats, function(value, key){
 		var stat = {name: key, value: value};
 		output.find('ul').append(_.template(WT.templates.statTemplate, stat));
 	});
+	
 
 	player.el.append(output);
-
+	
 
 	
 };
+
+WT.showCardBack = function(player){
+
+	console.log(player.el);
+	player.el.append(WT.templates.cardBack);
+}
 
 /**
 * Make a random choice for the AI
@@ -208,6 +227,8 @@ WT.compareCards = function(stat){
 		console.log('Winner: ' + winner.name);
 
 	WT.currentPlayer = winner;
+
+
 	
 	WT.updateScores();
 
@@ -264,6 +285,18 @@ WT.endGame = function(){
 	// 	$('header .message').html('Player 1 is the winner!');
 	// }
 }
+
+WT.getNonPlayingPlayer = function(){
+
+	var notPlaying;
+	_.each(WT.players, function(player){
+		if(player.name !== WT.currentPlayer.name)
+			notPlaying = player;
+	});
+
+	return notPlaying;
+}
+
 /**
 * Debug trace out cards quickly
 */
