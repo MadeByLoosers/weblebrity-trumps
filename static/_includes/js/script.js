@@ -180,11 +180,8 @@ WT.showCardFront = function(player){
 		var stat = {name: key, value: value};
 		output.find('ul').append(_.template(WT.templates.statTemplate, stat));
 	});
-	
 
 	player.el.append(output);
-	
-
 	
 };
 

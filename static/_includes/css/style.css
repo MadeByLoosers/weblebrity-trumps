@@ -371,7 +371,8 @@ header {
   width: 364px;
   padding: 30px 8px 35px 8px;
   display: block;
-  background: #fff no-repeat scroll 0 0; }
+  background: #fff no-repeat scroll 0 0;
+  height: 530px; }
   .card .portrait {
     margin-top: 31px;
     margin-left: 102px; }
@@ -386,7 +387,11 @@ header {
     line-height: 40px;
     margin-bottom: 10px; }
   .card img {
-    margin-left: 22px; }
+    margin-left: 22px;
+    border-color: #fff;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px; }
   .card ul {
     color: #000;
     margin: 26px 20px 0 20px;
@@ -411,6 +416,27 @@ header {
         font-size: 19px; }
       .card ul li .stat-val {
         right: 0; }
+  .card .card-back {
+    background: url("../img/card-back.jpg") no-repeat scroll 0 0;
+    width: 340px;
+    height: 530px;
+    display: block;
+    margin-left: 12px; }
+    .card .card-back p {
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      color: black;
+      font-size: 28px;
+      top: 580px;
+      width: 336px;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 32px;
+      top: 580px;
+      width: 336px;
+      text-align: center;
+      line-height: 34px; }
 
 /* _base.html5bp.mobile.scss */
 .ir {
