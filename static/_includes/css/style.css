@@ -215,7 +215,7 @@ td {
   padding: 0.2em 0; }
 
 /* _base.typography.scss */
-.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic {
+.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited {
   font-family: "Josefin Slab", "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
@@ -230,10 +230,10 @@ td {
 .font-josefin-semi-bold-italic {
   font-style: italic; }
 
-.font-josefin-bold, .font-josefin-bold-italic {
+.font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited {
   font-weight: 700; }
 
-.font-josefin-bold-italic {
+.font-josefin-bold-italic, header a, header a:visited {
   font-style: italic; }
 
 /* _base.standard.scss */

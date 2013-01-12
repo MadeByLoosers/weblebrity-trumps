@@ -20,6 +20,7 @@ header {
 	background: url('../img/top_grad.jpg') no-repeat center top;
 
 		a, a:visited {
+			@extend .font-josefin-bold-italic;
 			color:#fff;
 			text-decoration: none;
 		}
