@@ -127,7 +127,7 @@ WT.showCard = function(player){
 
 	var card = player.cards[0];
 
-	var output = $(_.template(WT.templates.cardTemplate, {name: card.name}));
+	var output = $(_.template(WT.templates.cardTemplate, {name: card.name, twitterName: card.accounts.twitter }));
 
 	_.each(card.stats, function(value, key){
 		var stat = {name: key, value: value};
