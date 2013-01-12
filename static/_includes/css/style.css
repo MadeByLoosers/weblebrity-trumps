@@ -215,7 +215,7 @@ td {
   padding: 0.2em 0; }
 
 /* _base.typography.scss */
-.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited {
+.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited, .card h2 {
   font-family: "Josefin Slab", "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
@@ -224,13 +224,13 @@ td {
 .font-josefin-italic {
   font-style: italic; }
 
-.font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span {
+.font-josefin-semi-bold, .font-josefin-semi-bold-italic {
   font-weight: 600; }
 
 .font-josefin-semi-bold-italic {
   font-style: italic; }
 
-.font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited {
+.font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited, .card h2 {
   font-weight: 700; }
 
 .font-josefin-bold-italic, header a, header a:visited {
@@ -276,38 +276,18 @@ header {
         text-align: left; }
 
 .card {
-  width: 388px;
+  width: 370px;
+  padding: 0 10px 0 8px;
   height: 608px;
   display: block;
   background: url("../img/card-bg.png") no-repeat scroll 0 0;
   position: absolute; }
-  .card.yours {
-    top: 0;
-    left: 0; }
-  .card.theirs {
-    top: 0;
-    right: -8px; }
-  .card .portrait {
-    margin-top: 31px;
-    margin-left: 102px; }
-
-#flip-token {
-  background: url("../img/flip-token-bg.png") no-repeat scroll 0 0;
-  width: 182px;
-  height: 182px;
-  position: absolute;
-  top: 110px;
-  left: 331px;
-  z-index: 2; }
-  #flip-token span {
-    font-size: 124px;
-    width: 100%;
+  .card h2 {
+    text-transform: uppercase;
+    color: #000;
+    font-size: 40px;
     text-align: center;
-    line-height: 124px;
-    padding-top: 10px;
-    letter-spacing: -8px;
-    margin-left: -6px;
-    display: block; }
+    width: 100%; }
 
 /* _base.html5bp.mobile.scss */
 .ir {

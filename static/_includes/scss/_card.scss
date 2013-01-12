@@ -1,0 +1,19 @@
+
+
+.card {
+	width: 370px;
+	padding:0 10px 0 8px;
+	height: 608px;
+	display: block;
+	background: url('../img/card-bg.png') no-repeat scroll 0 0;
+	position: absolute;
+
+	h2 {
+		@extend .font-josefin-bold;
+		text-transform: uppercase;
+		color:#000;
+		font-size: 40px;
+		text-align: center;
+		width: 100%;
+	}
+}
