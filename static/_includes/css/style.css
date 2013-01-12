@@ -215,7 +215,7 @@ td {
   padding: 0.2em 0; }
 
 /* _base.typography.scss */
-.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited, .card h2 {
+.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, .font-josefin-bold, .font-josefin-bold-italic, header a, header a:visited, .card h2 {
   font-family: "Josefin Slab", "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
@@ -224,7 +224,7 @@ td {
 .font-josefin-italic {
   font-style: italic; }
 
-.font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, #flip-token span {
+.font-josefin-semi-bold, .font-josefin-semi-bold-italic, body {
   font-weight: 600; }
 
 .font-josefin-semi-bold-italic {
@@ -257,70 +257,6 @@ h2 {
   margin: 80px auto 0;
   height: 620px;
   position: relative; }
-
-.card {
-  width: 388px;
-  height: 608px;
-  display: block;
-  background: url("../img/card-bg.png") no-repeat scroll 0 0;
-  position: absolute; }
-  .card.yours {
-    top: 0;
-    left: 0; }
-  .card.theirs {
-    top: 0;
-    right: -8px; }
-  .card .portrait {
-    margin-top: 31px;
-    margin-left: 102px; }
-  .card h2 {
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    font-size: 30px;
-    line-height: 31px;
-    margin-top: 23px;
-    text-transform: uppercase; }
-  .card ul {
-    list-style: none;
-    margin: 0;
-    padding: 0 22px; }
-    .card ul li {
-      float: left;
-      clear: both; }
-      .card ul li a {
-        margin: 0;
-        padding: 0;
-        smargin: 15px 10px;
-        padding: 16px 0;
-        margin: 0;
-        border-top: 1px solid #bababa;
-        border-bottom: 1px solid #bababa;
-        float: left;
-        clear: both; }
-        .card ul li a:hover {
-          background-color: #fb889b;
-          margin: 0;
-          border-top: 2px solid #bababa;
-          border-bottom: 2px solid #bababa; }
-
-#flip-token {
-  background: url("../img/flip-token-bg.png") no-repeat scroll 0 0;
-  width: 182px;
-  height: 182px;
-  position: absolute;
-  top: 110px;
-  left: 331px;
-  z-index: 2; }
-  #flip-token span {
-    font-size: 124px;
-    width: 100%;
-    text-align: center;
-    line-height: 124px;
-    padding-top: 10px;
-    letter-spacing: -8px;
-    margin-left: -6px;
-    display: block; }
 
 header {
   height: 174px;
@@ -440,9 +376,11 @@ header {
   border-radius: 10px;
   width: 370px;
   padding: 35px 10px 35px 8px;
-  height: 608px;
   display: block;
   background: white no-repeat scroll 0 0; }
+  .card .portrait {
+    margin-top: 31px;
+    margin-left: 102px; }
   .card h2 {
     text-transform: uppercase;
     color: #000;

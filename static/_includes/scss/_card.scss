@@ -9,9 +9,14 @@
 
 	width: 370px;
 	padding: 35px 10px 35px 8px;
-	height: 608px;
 	display: block;
 	background: #fff no-repeat scroll 0 0;
+
+	.portrait {
+		margin-top: 31px;
+		margin-left: 102px;
+	}
+
 
 	h2 {
 		@extend .font-josefin-bold;
