@@ -27,7 +27,7 @@ header {
 
 		.headerinner{
 
-			width: 720px;
+			width: 663px;
 			margin: 0 auto;
 			clear: both;
 			overflow: hidden;
@@ -59,7 +59,21 @@ header {
 	
 }
 
-
 #main {
-	
+	width: 910px;
+	margin: 35px auto 50px;
+
+
+	.player {
+		float: left;
+		width: 380px;
+
+		&#player1 {
+			margin-right: 70px;
+		}
+
+		&#player2 {
+			margin-left: 70px;
+		}
+	}
 }

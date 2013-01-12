@@ -257,7 +257,7 @@ header {
     color: #fff;
     text-decoration: none; }
   header .headerinner {
-    width: 720px;
+    width: 663px;
     margin: 0 auto;
     clear: both;
     overflow: hidden; }
@@ -275,19 +275,36 @@ header {
       header .headerinner .header-cta.suggest {
         text-align: left; }
 
+#main {
+  width: 910px;
+  margin: 35px auto 50px; }
+  #main .player {
+    float: left;
+    width: 380px; }
+    #main .player#player1 {
+      margin-right: 70px; }
+    #main .player#player2 {
+      margin-left: 70px; }
+
 .card {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -khtml-border-radius: 10px;
+  border-radius: 10px;
   width: 370px;
-  padding: 0 10px 0 8px;
+  padding: 35px 10px 35px 8px;
   height: 608px;
   display: block;
-  background: url("../img/card-bg.png") no-repeat scroll 0 0;
-  position: absolute; }
+  background: white no-repeat scroll 0 0; }
   .card h2 {
     text-transform: uppercase;
     color: #000;
     font-size: 40px;
     text-align: center;
-    width: 100%; }
+    width: 100%;
+    margin: 0; }
+  .card dl {
+    color: #000; }
 
 /* _base.html5bp.mobile.scss */
 .ir {
