@@ -1,4 +1,4 @@
-/* Author:
+ /* Author:
 
 */
 
@@ -9,8 +9,9 @@ WT.settings = {
 }
 
 WT.weblebrities = [];
-WT.player1 = { name: 'Player1', cards: [], el: $('#player1'), isAI:false};
-WT.player2 = { name: 'Player2', cards: [], el: $('#player2'), isAI:true};
+WT.$mainEl = {};
+WT.player1 = { name: 'Player1', cards: [], el: {}, isAI:false };
+WT.player2 = { name: 'Player2', cards: [], el: {}, isAI:true };
 WT.cardTemplate = '<div class="card"><h2><%= name %></h2><dl></dl></div>';
 WT.statTemplate = '<dt data-stat="<%= name %>"><%= name %></dt><dd data-stat="<%= name %>"><%= value %><dd>';
 WT.currentPlayer = WT.player1;
@@ -41,19 +42,58 @@ $(document).ready(function () {
 
 WT.init = function(){
 
+	WT.$mainEl = $('#main');
+
 	$.get('weblebrities.json', function(data){
 		WT.weblebrities = data;
 		WT.weblebrities = _.shuffle(WT.weblebrities);
-		var cardsEach = Math.floor(WT.weblebrities.length / 2);
+		WT.cardsEach = Math.floor(WT.weblebrities.length / 2);
 
-		WT.player1.cards = _.first(WT.weblebrities, cardsEach);
-		WT.player2.cards = _.rest(WT.weblebrities, cardsEach);
-
-		WT.startRound(WT.currentPlayer);
-		WT.updateScores();
+		WT.setUpGame();
 		
 	});
 };
+
+WT.setUpGame = function(){
+
+	//Present player choice		
+	WT.$mainEl.append(WT.templates.startTemplate);
+	WT.$mainEl.on('click', '.player', function(event){
+
+		event.preventDefault();
+
+		var data = $(this).data();
+
+		//Update Player objects
+
+		if(data.players === 1){
+			WT.player2.isAI = true;
+		}else if(data.players === 2){
+			WT.player2.isAI = false;
+			WT.player2.name = 'Player 2 (AI)';
+		}else{
+			//Something's gone horribly wrong.
+		}
+
+		//Add player divs
+		$('#start').remove();
+		WT.$mainEl.append(_.template(WT.templates.playerTemplate, {number:1}));
+		WT.$mainEl.append(_.template(WT.templates.playerTemplate, {number:2}));
+
+		WT.player1.el = $('#player1');
+		WT.player2.el = $('#player2');
+
+		//Divide up cards
+		WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
+		WT.player2.cards = _.rest(WT.weblebrities, WT.cardsEach);
+
+		//Start Rounds
+		WT.startRound(WT.currentPlayer);
+		WT.updateScores();
+
+	});
+	
+}
 
 WT.showCard = function(player){
 
