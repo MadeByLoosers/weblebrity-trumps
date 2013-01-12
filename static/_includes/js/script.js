@@ -96,12 +96,16 @@ WT.setUpGame = function(){
 */
 WT.startRound = function(){
 
+	WT.player2.el.html('');
+	WT.player1.el.html('');
 
 	var player = WT.currentPlayer;
 	WT.showCardFront(player);
 
 	var nonPlayer = WT.getNonPlayingPlayer();
 	WT.showCardBack(nonPlayer);
+
+	WT.updateInfoCircle('vs');
 
 	if(player.isAI){
 		//Make a choice
@@ -127,7 +131,35 @@ WT.startRound = function(){
 	}
 };
 
+WT.updateInfoCircle = function(state){
 
+	//Add if not there
+	if(_.isEmpty(WT.infoCircle)){		
+		WT.$mainEl.append(WT.templates.infoCircle);
+		console.log(WT.$mainEl.find('.info-circle'));
+		WT.infoCircle = WT.$mainEl.find('.info-circle');
+	} 
+
+	var content = '';
+
+	switch(state)
+	{
+		case 'vs':
+			content = 'VS';
+			break;
+		case 'player1win':
+			content = 'Player 1 wins';
+			break;
+		case 'player2win':	
+			content = 'Player 1 wins';
+			break;
+		case 'draw':
+			content = 'Draw';
+			break;	
+	}
+
+	WT.infoCircle.html(content);
+}
 
 /**
 * Display a card
@@ -208,16 +240,18 @@ WT.compareCards = function(stat){
 		console.log('Player 1: '+ player1Value , 'Player 2: '+ player2Value);
 
 	if(draw){
-		// $('header .message').html('Draw');
+		WT.updateInfoCircle('draw');
     	WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
     	WT.player2.cards.push(WT.player2.cards.shift());
     	winner = WT.currentPlayer;
 	}else{		
-		// $('header .message').html('Winner: '+winner.name);
+		
 		if(winner === WT.player1){
+			WT.updateInfoCircle('player1win');
 			WT.player1.cards.push(WT.player1.cards.shift());
 			WT.player1.cards.push(WT.player2.cards.shift());
 		}else{
+			WT.updateInfoCircle('player2win');
 			WT.player2.cards.push(WT.player2.cards.shift());
 			WT.player2.cards.push(WT.player1.cards.shift());
 		}
