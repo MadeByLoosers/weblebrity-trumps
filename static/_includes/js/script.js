@@ -50,7 +50,7 @@ WT.setUpGame = function(){
 	var $start = $(WT.templates.startTemplate);
 	WT.$mainEl.append($start);
 
-	WT.$mainEl.on('click', '.player', function(event){
+	WT.$mainEl.on('click', '.button', function(event){
 
 		event.preventDefault();
 		WT.$mainEl.off('click');
