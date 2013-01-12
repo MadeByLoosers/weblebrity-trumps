@@ -69,7 +69,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #cccccc;
   margin: 1em 0;
   padding: 0; }
 
@@ -86,7 +86,7 @@ mark {
 
 pre, code, kbd, samp {
   font-family: monospace, serif;
-  _font-family: 'courier new', monospace;
+  _font-family: "courier new", monospace;
   font-size: 1em; }
 
 pre {
@@ -216,7 +216,7 @@ td {
 
 /* _base.typography.scss */
 .josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, #flip-token span, .font-josefin-bold, .font-josefin-bold-italic {
-  font-family: 'Josefin Slab', "Times New Roman", Times, serif; }
+  font-family: "Josefin Slab", "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
   font-weight: 400; }
@@ -238,11 +238,40 @@ td {
 
 /* _base.standard.scss */
 html {
-  background: url("../img/wood-bg.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+
+body {
+  background-color: #222222;
+  color: #fff; }
+
+header {
+  height: 174px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  background: url("../img/top_grad.jpg") no-repeat center top; }
+  header a, header a:visited {
+    color: #fff;
+    text-decoration: none; }
+  header .headerinner {
+    width: 621px;
+    margin: 0 auto; }
+    header .headerinner .lockup {
+      width: 141px;
+      height: 161px;
+      padding-top: 30px;
+      float: left; }
+    header .headerinner .header-cta {
+      float: left;
+      width: 240px;
+      padding-top: 50px; }
+      header .headerinner .header-cta.wtf {
+        text-align: right; }
+      header .headerinner .header-cta.suggest {
+        text-align: left; }
 
 #main {
   width: 840px;
@@ -250,16 +279,12 @@ html {
   height: 620px;
   position: relative; }
 
-.player {
-  float:left;
-  width: 388px;
-}
 .card {
   width: 388px;
   height: 608px;
   display: block;
   background: url("../img/card-bg.png") no-repeat scroll 0 0;
-  }
+  position: absolute; }
   .card.yours {
     top: 0;
     left: 0; }
@@ -360,7 +385,7 @@ html {
     content: ""; }
 
   pre, blockquote {
-    border: 1px solid #999;
+    border: 1px solid #999999;
     page-break-inside: avoid; }
 
   thead {
@@ -381,9 +406,3 @@ html {
 
   h2, h3 {
     page-break-after: avoid; } }
-
-header{
-  position: fixed;
-  height: 40px;
-  
-}    

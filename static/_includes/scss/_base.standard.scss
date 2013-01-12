@@ -1,11 +1,61 @@
 /* _base.standard.scss */
 html { 
-	background: url('../img/wood-bg.jpg') no-repeat center center fixed; 
+	
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
 }
+
+body {
+	background-color:#222222;
+	color:#fff;
+}
+
+header {
+	height: 174px;
+	width: 100%;	
+	margin:0 auto;
+	position: relative;
+	background: url('../img/top_grad.jpg') no-repeat center top;
+
+		a, a:visited {
+			color:#fff;
+			text-decoration: none;
+		}
+
+		.headerinner{
+
+			width: 621px;
+			margin: 0 auto;
+		
+			.lockup {
+				width: 141px;
+				height: 161px;
+				padding-top: 30px;
+				float: left;
+
+			}
+
+			.header-cta {
+				float: left;
+				width: 240px;
+				padding-top: 50px;
+
+				&.wtf {
+					text-align: right;
+				}
+
+				&.suggest {
+					text-align: left;
+				}
+			}
+		}
+
+
+	
+}
+
 
 #main {
 	width: 840px;
