@@ -107,28 +107,33 @@ WT.startRound = function(){
 
 	WT.updateInfoCircle('vs');
 
-	if(player.isAI){
-		//Make a choice
-		setTimeout(WT.makeAIChoice, 1000);
-	}else{
+	_.delay(function () {
+		// Wait for token to flip back to VS
 
-		var $playerStats = player.el.find('li');
+		if(player.isAI){
+			//Make a choice
+			setTimeout(WT.makeAIChoice, 1000);
+		}else{
 
-		$playerStats.on('click', function(e){
-			
-			$playerStats.off('click');
+			var $playerStats = player.el.find('li');
 
-			var stat = $(this).find('.stat').text();
-			
-			//Show other players card
-			if(player === WT.player1){
-				WT.showCardFront(WT.player2);
-			}else{
-				WT.showCardFront(WT.player1);
-			}
-			WT.compareCards(stat);	
-		});
-	}
+			$playerStats.on('click', function(e){
+				
+				$playerStats.off('click');
+
+				var stat = $(this).find('.stat').text();
+				
+				//Show other players card
+				if(player === WT.player1){
+					WT.showCardFront(WT.player2);
+				}else{
+					WT.showCardFront(WT.player1);
+				}
+				WT.compareCards(stat);	
+			});
+		}
+
+	}, 620);
 };
 
 WT.updateInfoCircle = function(state){
@@ -138,30 +143,44 @@ WT.updateInfoCircle = function(state){
 		WT.$mainEl.append(WT.templates.infoCircle);
 		console.log(WT.$mainEl.find('.info-circle'));
 		WT.infoCircle = WT.$mainEl.find('.info-circle');
-	} 
-
-	var content = '';
-
-	switch(state)
-	{
-		case 'vs':
-			content = 'VS';
-			break;
-		case 'player1win':
-			content = 'Player 1 wins';
-			break;
-		case 'player2win':	
-			content = 'Player 1 wins';
-			break;
-		case 'draw':
-			content = 'Draw';
-			break;	
-		case 'score':
-			WT.player1.cards
-			content = WT.player1.cards.length + ' v ' + WT.player2.cards.length
 	}
 
-	WT.infoCircle.html(content);
+	var delay = 520;
+
+	WT.infoCircle.addClass('flip');
+
+	_.delay(function () {
+
+		var content = '';
+
+		switch(state)
+		{
+			case 'vs':
+				content = '<p>VS</p>';
+				break;
+			case 'player1win':
+				content = '<p>Player 1 wins</p>';
+				break;
+			case 'player2win':	
+				content = '<p>Player 2 wins</p>';
+				break;
+			case 'draw':
+				content = '<p>Draw</p>';
+				break;	
+			case 'score':
+				content = '<p class="score"><span class="winner">' + WT.currentPlayer.name + ' won!</span><br /><span>' + WT.player1.cards.length + '</span> - <span>' + WT.player2.cards.length + '</span></p>';
+				break;
+		}
+
+		WT.infoCircle.html(content);
+
+		_.delay(function () {
+			WT.infoCircle.addClass('no-transitions').removeClass('flip').removeClass('no-transitions');
+		}, 100);
+
+
+	}, delay);
+
 }
 
 /**

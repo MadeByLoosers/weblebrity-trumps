@@ -47,18 +47,26 @@
 		float: left;
 
 		li {
+			@include transition(background 0.2s ease-out);
 			border-bottom: 1px solid #ccc;
 			float: left;
 			clear: both;
 			width: 320px;
 			height: 39px;
 			position: relative;
-			cursor: pointer;
 
-			&:hover {
+			#player1 & {
+				cursor: pointer;
+			}
+
+			#player1 &:hover {
 				background-color: #f2b235;
 				padding: 0 12px;
 				width: 296px;
+			}
+
+			#player2 &:hover {
+				background-color: #fa7a90;
 			}
 
 			span {
@@ -85,18 +93,25 @@
 			padding: 0;
 			margin: 0;
 			position: absolute;
-			color: black;
-			font-size: 28px;
-			top: 580px;
-			width: 336px;
+			color: #000;
 			text-align: center;
 			text-transform: uppercase;
 
 			font-size: 32px;
-			top: 580px;
+			top: 328px;
+			padding-top: 50px;
+			padding-bottom: 50px;
 			width: 336px;
 			text-align: center;
 			line-height: 34px;
+
+			#player1 & {
+				background: url('../img/card-back-p1-arrows.png') no-repeat scroll center 0;
+			}			
+
+			#player2 & {
+				background: url('../img/card-back-p2-arrows.png') no-repeat scroll center 0;
+			}
 		}
 	}
 }
