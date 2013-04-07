@@ -18,11 +18,7 @@ WT.players = [WT.player1, WT.player2];
 //Always start with first player
 WT.currentPlayer = WT.player1;
 
-$(document).ready(function () {
 
-	//GO!
-	WT.init();
-});
 
 /**
 * Start here. Load card data.
@@ -60,13 +56,12 @@ WT.setUpGame = function(){
 		var data = $(this).data();
 
 		//Update Player objects
-		if(data.players === 1){
-			WT.player2.isAI = true;
-		}else if(data.players === 2){
+		if(data.players === 2){
 			WT.player2.isAI = false;
-			WT.player2.name = 'Player 2 (AI)';
+			WT.player2.name = 'Player 2';
 		}else{
-			//Something's gone horribly wrong.
+			WT.player2.isAI = true;
+			WT.player2.name = 'Player 2 (AI)';
 		}
 
 		//Add player divs
@@ -105,9 +100,8 @@ WT.startRound = function(){
 	var nonPlayer = WT.getNonPlayingPlayer();
 	WT.showCardBack(nonPlayer);
 
-	WT.updateInfoCircle('vs');
+	WT.updateInfoCircle('vs').done(function(){
 
-	_.delay(function () {
 		// Wait for token to flip back to VS
 
 		if(player.isAI){
@@ -129,57 +123,74 @@ WT.startRound = function(){
 				}else{
 					WT.showCardFront(WT.player1);
 				}
-				WT.compareCards(stat);	
+				WT.compareCards(stat);
 			});
 		}
 
-	}, 620);
+	});
+
+	
 };
 
 WT.updateInfoCircle = function(state){
 
+	var dfd = $.Deferred();
+
 	//Add if not there
-	if(_.isEmpty(WT.infoCircle)){		
+	if(_.isEmpty(WT.infoCircle)){
 		WT.$mainEl.append(WT.templates.infoCircle);
-		console.log(WT.$mainEl.find('.info-circle'));
 		WT.infoCircle = WT.$mainEl.find('.info-circle');
+
 	}
+		
+	WT.infoCircle.on(getTransitionEndEventName(), function(event){
 
-	var delay = 520;
-
-	WT.infoCircle.addClass('flip');
-
-	_.delay(function () {
+		WT.infoCircle.off(getTransitionEndEventName());
 
 		var content = '';
 
 		switch(state)
 		{
 			case 'vs':
-				content = '<p>VS</p>';
+				content = '<p class="vs">VS</p>';
 				break;
 			case 'player1win':
-				content = '<p>Player 1 wins</p>';
+				content = '<p class="wins">Player 1<br />wins</p>';
 				break;
-			case 'player2win':	
-				content = '<p>Player 2 wins</p>';
+			case 'player2win':
+				content = '<p class="wins">Player 2<br />wins</p>';
 				break;
 			case 'draw':
-				content = '<p>Draw</p>';
+				content = '<p class="draw">Draw</p>';
 				break;	
 			case 'score':
-				content = '<p class="score"><span class="winner">' + WT.currentPlayer.name + ' won!</span><br /><span>' + WT.player1.cards.length + '</span> - <span>' + WT.player2.cards.length + '</span></p>';
+				content = '<p class="score"><span>' + WT.player1.cards.length + '</span> - <span>' + WT.player2.cards.length + '</span></p>';
 				break;
 		}
 
 		WT.infoCircle.html(content);
 
+		WT.infoCircle.on(getTransitionEndEventName(), function(event){
+		
+			dfd.resolve();
+			WT.infoCircle.off(getTransitionEndEventName());
+		});
+
 		_.delay(function () {
-			WT.infoCircle.addClass('no-transitions').removeClass('flip').removeClass('no-transitions');
+			WT.infoCircle.addClass('no-transitions').removeClass('flip').removeClass('no-transitions').addClass('flipped');
 		}, 100);
 
 
-	}, delay);
+	
+	});
+
+	
+	_.delay(function(){
+		WT.infoCircle.addClass('flip');
+	}, 500);
+
+	// Return a promise
+	return dfd.promise();
 
 }
 
@@ -259,20 +270,20 @@ WT.compareCards = function(stat){
 		console.log('Player 1: '+ player1Value , 'Player 2: '+ player2Value);
 
 	if(draw){
-		WT.updateInfoCircle('draw');
+		WT.updateInfoCircle('draw').done(WT.showScores);
     	WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
     	WT.player2.cards.push(WT.player2.cards.shift());
     	winner = WT.currentPlayer;
 	}else{		
 		
 		if(winner === WT.player1){
-			WT.updateInfoCircle('player1win');
 			WT.player1.cards.push(WT.player1.cards.shift());
 			WT.player1.cards.push(WT.player2.cards.shift());
+			WT.updateInfoCircle('player1win').done(WT.showScores);
 		}else{
-			WT.updateInfoCircle('player2win');
 			WT.player2.cards.push(WT.player2.cards.shift());
 			WT.player2.cards.push(WT.player1.cards.shift());
+			WT.updateInfoCircle('player2win').done(WT.showScores);
 		}
 	}
 	
@@ -281,8 +292,6 @@ WT.compareCards = function(stat){
 
 	WT.currentPlayer = winner;
 
-	setTimeout(WT.updateInfoCircle('score'), 1000);
-
 	if(WT.player1.cards.length <= 0 && WT.player2.cards.length <= 0){
 		WT.endGame();
 	}else{
@@ -290,6 +299,12 @@ WT.compareCards = function(stat){
 	}
 	
 };
+
+WT.showScores = function(){
+	_.delay(function(){
+		WT.updateInfoCircle('score');
+	}, 1000);	
+}
 
 /*
 * Countdown to the next round
@@ -370,3 +385,24 @@ WT.debugCards = function(){
 		console.log('***** CARDS DUMP END *****');
 	}
 }
+
+/*
+* Helper to get transition end event name from modernizr
+*/
+function getTransitionEndEventName(){
+	var transEndEventNames = {
+	    'WebkitTransition' : 'webkitTransitionEnd',
+	    'MozTransition'    : 'transitionend',
+	    'OTransition'      : 'oTransitionEnd',
+	    'msTransition'     : 'MSTransitionEnd',
+	    'transition'       : 'transitionend'
+	};
+	return transEndEventNames[ Modernizr.prefixed('transition') ];
+
+}
+$(document).ready(function () {
+
+	//GO!
+	WT.init();
+});
+
