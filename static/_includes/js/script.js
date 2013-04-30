@@ -27,7 +27,7 @@ WT.init = function(){
 
     WT.$mainEl = $('#main');
 
-    $.get('weblebrities.json', function(data){
+    $.get('weblebrity-game-stats/latest.json', function(data){
         WT.weblebrities = data;
         WT.weblebrities = _.shuffle(WT.weblebrities);
         WT.cardsEach = Math.floor(WT.weblebrities.length / 2);

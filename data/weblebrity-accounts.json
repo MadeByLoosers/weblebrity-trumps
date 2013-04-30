@@ -6,8 +6,6 @@
         "LinkedIn": "http://www.linkedin.com/in/paulirish",
         "Github": "paulirish",
         "Lanyrd": "paul_irish",
-        "Facebook": "paul.irish",
-        "id": 0
     },
     {
         "No.": "2",
@@ -16,7 +14,6 @@
         "LinkedIn": "http://uk.linkedin.com/in/ryancarson",
         "Github": "ryancarson",
         "Lanyrd": "ryancarson",
-        "Facebook": "ryancarson",
         "id": 1
     },
     {
@@ -26,7 +23,6 @@
         "LinkedIn": "http://uk.linkedin.com/in/osmani",
         "Github": "addyosmani",
         "Lanyrd": "addyosmani",
-        "Facebook": "addyosmani",
         "id": 2
     },
     {
@@ -36,7 +32,6 @@
         "LinkedIn": "",
         "Github": "ry",
         "Lanyrd": "ryah",
-        "Facebook": "",
         "id": 3
     },
     {
@@ -46,7 +41,6 @@
         "LinkedIn": "",
         "Github": "",
         "Lanyrd": "finkd",
-        "Facebook": "zuck",
         "id": 4
     },
     {
@@ -56,7 +50,6 @@
         "LinkedIn": "",
         "Github": "dhh",
         "Lanyrd": "dhh",
-        "Facebook": "",
         "id": 5
     },
     {
@@ -66,7 +59,6 @@
         "LinkedIn": "http://www.linkedin.com/in/buytaert",
         "Github": "dbuytaert",
         "Lanyrd": "dries",
-        "Facebook": "dries.buytaert",
         "id": 6
     },
     {
@@ -76,7 +68,6 @@
         "LinkedIn": "http://www.linkedin.com/in/mattm",
         "Github": "m",
         "Lanyrd": "photomatt",
-        "Facebook": "matt.mullenweg",
         "id": 7
     },
     {
@@ -86,7 +77,6 @@
         "LinkedIn": "http://uk.linkedin.com/in/sebleedelisle",
         "Github": "sebleedelisle",
         "Lanyrd": "seb_ly",
-        "Facebook": "sebleedelisle",
         "id": 8
     },
     {
@@ -96,7 +86,6 @@
         "LinkedIn": "http://uk.linkedin.com/in/remysharp",
         "Github": "remy",
         "Lanyrd": "rem",
-        "Facebook": "100000293257841",
         "id": 9
     },
     {
@@ -106,17 +95,15 @@
         "LinkedIn": "",
         "Github": "aral",
         "Lanyrd": "aral",
-        "Facebook": "aralbalkan",
         "id": 10
     },
     {
         "No.": "12",
-        "Name": "Tom (My Space)",
-        "Twitter": "",
+        "Name": "Harry Roberts",
+        "Twitter": "csswizardry",
         "LinkedIn": "",
-        "Github": "",
-        "Lanyrd": "",
-        "Facebook": "",
+        "Github": "csswizardry",
+        "Lanyrd": "csswizardry",
         "id": 11
     },
     {
@@ -124,109 +111,98 @@
         "Name": "Ade Rowbotham",
         "Twitter": "_ade",
         "LinkedIn": "10744812",
-        "Github": "aderowbowtham",
+        "Github": "aderowbotham",
         "Lanyrd": "_ade",
-        "Facebook": "ade77",
         "id": 12
     },
     {
         "No.": "14",
-        "Name": "Lea Verou",
-        "Twitter": "LeaVerou",
-        "LinkedIn": "40474952",
-        "Github": "LeaVerou",
-        "Lanyrd": "LeaVerou",
-        "Facebook": "",
-        "id": 13
-    },
-    {
-        "No.": "14",
-        "Name": "Lea Verou",
-        "Twitter": "LeaVerou",
-        "LinkedIn": "40474952",
-        "Github": "LeaVerou",
-        "Lanyrd": "LeaVerou",
-        "Facebook": "",
+        "Name": "Rebecca Murphey",
+        "Twitter": "rmurphey",
+        "LinkedIn": "",
+        "Github": "rmurphey",
+        "Lanyrd": "rmurphey",
         "id": 13
     },
     {
         "No.": "15",
+        "Name": "Lea Verou",
+        "Twitter": "LeaVerou",
+        "LinkedIn": "40474952",
+        "Github": "LeaVerou",
+        "Lanyrd": "LeaVerou",
+        "id": 14
+    },
+    {
+        "No.": "16",
         "Name": "Chris Coyier",
         "Twitter": "chriscoyier",
         "LinkedIn": "",
         "Github": "chriscoyier",
         "Lanyrd": "chriscoyier",
-        "Facebook": "",
-        "id": 14
+        "id": 15
     },
     {
-        "No.": "16",
+        "No.": "17",
         "Name": "Johnathon Snook",
         "Twitter": "snookca",
         "LinkedIn": "211762214",
         "Github": "snookca",
         "Lanyrd": "snookca",
-        "Facebook": "",
-        "id": 15
+        "id": 16
     },
     {
-        "No.": "17",
+        "No.": "18",
         "Name": "Cameron Moll",
         "Twitter": "cameronmoll",
         "LinkedIn": "335003",
         "Github": "cameronmoll",
         "Lanyrd": "cameronmoll",
-        "Facebook": "",
-        "id": 16
+        "id": 17
     },
     {
-        "No.": "18",
+        "No.": "19",
         "Name": "Jeffrey Zeldman",
         "Twitter": "zeldman",
         "LinkedIn": "17438",
         "Github": "zeldman",
         "Lanyrd": "zeldman",
-        "Facebook": "",
-        "id": 17
+        "id": 18
     },
     {
-        "No.": "19",
+        "No.": "20",
         "Name": "Eric Meyer",
         "Twitter": "meyerweb",
         "LinkedIn": "87440",
         "Github": "ericmeyer",
         "Lanyrd": "meyerweb",
-        "Facebook": "",
-        "id": 18
+        "id": 19
     },
     {
-        "No.": "20",
+        "No.": "21",
         "Name": "Brian Hoff",
         "Twitter": "behoff",
         "LinkedIn": "26983440",
         "Github": "behoff",
         "Lanyrd": "behoff",
-        "Facebook": "",
-        "id": 19
+        "id": 20
     },
     {
-        "No.": "21",
+        "No.": "22",
         "Name": "Vitaly Friedman",
         "Twitter": "vitalyf",
         "LinkedIn": "8614404",
         "Github": "vitalyf",
         "Lanyrd": "vitalyf",
-        "Facebook": "",
-        "id": 20
+        "id": 21
     },
     {
-        "No.": "22",
+        "No.": "23",
         "Name": "John Resig",
         "Twitter": "jeresig",
         "LinkedIn": "2115224",
         "Github": "jeresig",
         "Lanyrd": "jeresig",
-        "Facebook": "",
-        "id": 20
+        "id": 22
     }
 ]

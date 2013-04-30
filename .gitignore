@@ -19,3 +19,8 @@ node_modules/node-google-spreadsheets/node_modules/*
 npm-debug.log
 /static/_includes/*.db
 Thumbs.db
+
+/static/weblebrity-profile-images/*
+!/static/weblebrity-profile-images/.gitignore
+/static/weblebrity-game-stats/*
+!/static/weblebrity-game-stats/.gitignore
