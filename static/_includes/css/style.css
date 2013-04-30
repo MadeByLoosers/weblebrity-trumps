@@ -215,7 +215,7 @@ td {
   padding: 0.2em 0; }
 
 /* _base.typography.scss */
-.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, .font-josefin-bold, .font-josefin-bold-italic, header a, .card h2 {
+.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, .font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .card h2 {
   font-family: 'Josefin Slab', "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
@@ -230,10 +230,10 @@ td {
 .font-josefin-semi-bold-italic {
   font-style: italic; }
 
-.font-josefin-bold, .font-josefin-bold-italic, header a, .card h2 {
+.font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .card h2 {
   font-weight: 700; }
 
-.font-josefin-bold-italic, header a {
+.font-josefin-bold-italic, header a, .big-circle .cta-suggest a {
   font-style: italic; }
 
 /* _base.standard.scss */
@@ -253,10 +253,11 @@ h2 {
   text-align: center; }
 
 header {
-  height: 174px;
+  height: 100px;
   width: 100%;
   margin: 0 auto;
   position: relative;
+  z-index: 2;
   background: url("../img/top_grad.jpg") no-repeat center top; }
   header a, header a:visited {
     color: #fff;
@@ -269,8 +270,8 @@ header {
     header .headerinner .lockup {
       width: 161px;
       height: 143px;
-      padding-top: 30px;
-      float: left; }
+      padding-top: 10px;
+      margin: 0 auto; }
     header .headerinner .header-cta {
       float: left;
       width: 240px;
@@ -283,7 +284,8 @@ header {
 #main {
   width: 910px;
   margin: 25px auto 50px;
-  position: relative; }
+  position: relative;
+  z-index: 1; }
   #main .player {
     float: left;
     width: 380px; }
@@ -300,11 +302,11 @@ header {
       margin-left: 70px; }
 
 .big-circle {
-  width: 666px;
-  height: 528px;
+  width: 600px;
+  height: 502px;
   display: block;
   background: url("../img/large-circle.png") no-repeat scroll 0 0;
-  padding: 140px 0 0 0;
+  padding: 100px 0 0 0;
   margin: 0 auto;
   position: relative; }
   .big-circle h2 {
@@ -316,7 +318,7 @@ header {
     text-align: center;
     padding-top: 8px;
     padding-bottom: 20px;
-    width: 654px;
+    width: 600px;
     min-height: 124px;
     margin-bottom: 30px; }
     .big-circle h2:before, .big-circle h2:after {
@@ -326,7 +328,7 @@ header {
       content: '';
       background: url("../img/large-title-icons.png") no-repeat scroll 0 0;
       position: absolute;
-      left: 300px; }
+      left: 265px; }
     .big-circle h2:before {
       top: 0; }
     .big-circle h2:after {
@@ -368,10 +370,12 @@ header {
       padding-top: 5px; }
       .big-circle .controls .button.first {
         margin-right: 20px; }
-  .big-circle .social {
-    text-align: center; }
-    .big-circle .social p {
-      margin-bottom: 0; }
+  .big-circle .cta-suggest {
+    text-align: center;
+    margin-bottom: 0; }
+    .big-circle .cta-suggest a,
+    .big-circle .cta-suggest a:visited {
+      color: #fff; }
 
 .info-circle {
   width: 187px;
@@ -440,10 +444,11 @@ header {
   -khtml-border-radius: 10px;
   border-radius: 10px;
   width: 364px;
-  padding: 30px 8px 35px 8px;
+  padding: 8px 8px 35px 8px;
   display: block;
   background: #fff no-repeat scroll 0 0;
-  height: 530px;
+  height: 480px;
+  position: relative;
   /*
   	p.bio:before {
   		content:open-quote;
@@ -463,30 +468,32 @@ header {
   		top:-10px;
   	}
   */ }
-  .card .portrait {
-    margin-top: 31px;
-    margin-left: 102px; }
   .card h2 {
     text-transform: uppercase;
     color: #000;
+    line-height: 40px;
     font-size: 38px;
     text-align: center;
-    width: 100%;
     margin: 0;
     padding: 0;
-    line-height: 40px;
-    margin-bottom: 10px; }
+    display: table-cell;
+    vertical-align: middle;
+    height: 100px;
+    width: 360px; }
   .card img {
     float: left;
     margin: 0 22px;
     border-color: #fff;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
-    border-radius: 8px; }
-  .card p.bio {
-    float: left;
+    border-radius: 8px;
+    width: 160px;
+    height: 160px; }
+  .card .bio {
+    display: table-cell;
+    vertical-align: middle;
     width: 150px;
-    height: 160px;
+    height: 150px;
     padding: 5px 0px;
     font-size: 14px;
     font-style: italic;
@@ -494,14 +501,22 @@ header {
     margin: 0;
     color: #000;
     position: relative; }
-  .card ul {
-    clear: both;
+    .card .bio p {
+      width: 150px;
+      overflow: hidden; }
+  .card .card-details {
+    position: absolute;
+    top: 120px;
+    left: 0; }
+  .card ul.stats {
+    position: absolute;
+    bottom: 50px;
     color: #000;
     margin: 26px 20px 0 20px;
     padding: 0;
     list-style: none;
     float: left; }
-    .card ul li {
+    .card ul.stats li {
       -webkit-transition: background 0.2s ease-out;
       -moz-transition: background 0.2s ease-out;
       -ms-transition: background 0.2s ease-out;
@@ -515,31 +530,31 @@ header {
       position: relative;
       background-color: #fff;
       padding: 0 6px; }
-      #player1 .card ul li {
+      #player1 .card ul.stats li {
         cursor: pointer; }
-      #player1 .card ul li:hover {
+      #player1 .card ul.stats li:hover {
         background-color: #f2b235; }
-      #player2 .card ul li:hover {
+      #player2 .card ul.stats li:hover {
         background-color: #fa7a90; }
-      .card ul li.selected {
+      .card ul.stats li.selected {
         background-color: #ccc;
         -webkit-transition: background-color 1s;
         -moz-transition: background-color 1s;
         -ms-transition: background-color 1s;
         -o-transition: background-color 1s;
         transition: background-color 1s; }
-      .card ul li span {
+      .card ul.stats li span {
         position: absolute;
         top: 6px;
         font-size: 19px; }
-      .card ul li .stat-val {
+      .card ul.stats li .stat-val {
         right: 6px; }
   .card .card-back {
     background: url("../img/card-back.jpg") no-repeat scroll 0 0;
     width: 340px;
-    height: 530px;
+    height: 480px;
     display: block;
-    margin-left: 12px; }
+    margin: 12px 0 0 12px; }
     .card .card-back p {
       padding: 0;
       margin: 0;
@@ -548,7 +563,7 @@ header {
       text-align: center;
       text-transform: uppercase;
       font-size: 32px;
-      top: 328px;
+      top: 278px;
       padding-top: 50px;
       padding-bottom: 50px;
       width: 336px;

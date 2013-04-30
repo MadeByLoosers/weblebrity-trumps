@@ -13,8 +13,8 @@ WT.weblebrities = [];
 WT.$mainEl = {};
 WT.$player1HeadScore = {};
 WT.$player2HeadScore = {};
-WT.player1 = { name: 'Player1', cards: [], el: {}, isAI:false };
-WT.player2 = { name: 'Player2', cards: [], el: {}, isAI:true };
+WT.player1 = { name: 'Player1', number: 1, oppositeNumber: 2, cards: [], el: {}, isAI:false };
+WT.player2 = { name: 'Player2', number: 2, oppositeNumber: 1, cards: [], el: {}, isAI:true };
 WT.players = [WT.player1, WT.player2];
 
 //Always start with first player
@@ -222,6 +222,7 @@ WT.showCardFront = function(player, index){
 
 WT.showCardBack = function(player){
     player.el.append(WT.templates.cardBack);
+    player.el.find('.player-no').html(player.oppositeNumber);
 };
 
 /**

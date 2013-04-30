@@ -8,27 +8,25 @@
     border-radius: $cornerRadius;
 
 	width: 364px;
-	padding: 30px 8px 35px 8px;
+	padding: 8px 8px 35px 8px;
 	display: block;
 	background: #fff no-repeat scroll 0 0;
-	height: 530px;
-
-	.portrait {
-		margin-top: 31px;
-		margin-left: 102px;
-	}
+	height: 480px;
+	position:relative;
 
 	h2 {
 		@extend .font-josefin-bold;
 		text-transform: uppercase;
 		color:#000;
+		line-height: 40px;
 		font-size: 38px;
 		text-align: center;
-		width: 100%;
 		margin: 0;
 		padding: 0;
-		line-height: 40px;
-		margin-bottom: 10px;
+		display:table-cell;
+		vertical-align:middle;
+		height:100px;
+		width: 360px;
 	}
 
 	img {
@@ -38,12 +36,16 @@
     	-webkit-border-radius: 8px;
 		-moz-border-radius: 8px;
 		border-radius: 8px;
+		width:160px;
+		height:160px;
 	}
 
-	p.bio {
-		float:left;
+	.bio {
+		//float:left;
+		display:table-cell;
+		vertical-align:middle;
 		width:150px;
-		height:160px;
+		height:150px;
 		padding:5px 0px;
 		font-size:14px;
 		font-style:italic;
@@ -51,6 +53,11 @@
 		margin:0;
 		color:#000;
 		position:relative;
+
+		p {
+			width:150px;
+			overflow:hidden;
+		}
 	}
 /*
 	p.bio:before {
@@ -71,8 +78,17 @@
 		top:-10px;
 	}
 */
-	ul {
-		clear:both;
+
+	.card-details {
+		position:absolute;
+		top: 120px;
+		left: 0;
+	}
+
+
+	ul.stats {
+		position:absolute;
+		bottom:50px;
 		color: #000;
 		margin: 26px 20px 0 20px;
 		padding: 0;
@@ -125,9 +141,9 @@
 	.card-back {
 		background: url('../img/card-back.jpg') no-repeat scroll 0 0;
 		width: 340px;
-		height: 530px;
+		height: 480px;
 		display: block;
-		margin-left: 12px;
+		margin: 12px 0 0 12px;
 
 		p {
 			padding: 0;
@@ -138,7 +154,7 @@
 			text-transform: uppercase;
 
 			font-size: 32px;
-			top: 328px;
+			top: 278px;
 			padding-top: 50px;
 			padding-bottom: 50px;
 			width: 336px;

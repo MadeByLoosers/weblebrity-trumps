@@ -1,6 +1,5 @@
 /* _base.standard.scss */
 html {
-
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -21,10 +20,11 @@ h2 {
 
 
 header {
-	height: 174px;
+	height: 100px;
 	width: 100%;
 	margin:0 auto;
 	position: relative;
+	z-index:2;
 	background: url('../img/top_grad.jpg') no-repeat center top;
 
 		a, a:visited {
@@ -34,7 +34,6 @@ header {
 		}
 
 		.headerinner{
-
 			width: 663px;
 			margin: 0 auto;
 			clear: both;
@@ -43,9 +42,8 @@ header {
 			.lockup {
 				width: 161px;
 				height: 143px;
-				padding-top: 30px;
-				float: left;
-
+				padding-top: 10px;
+				margin:0 auto;
 			}
 
 			.header-cta {
@@ -71,6 +69,7 @@ header {
 	width: 910px;
 	margin: 25px auto 50px;
 	position: relative;
+	z-index:1;
 
 	.player {
 		float: left;

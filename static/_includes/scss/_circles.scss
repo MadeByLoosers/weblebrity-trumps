@@ -1,10 +1,10 @@
 
 .big-circle {
-    width: 666px;
-    height: 528px;
+    width: 600px;
+    height: 502px;
     display: block;
     background: url('../img/large-circle.png') no-repeat scroll 0 0;
-    padding: 140px 0 0 0;
+    padding: 100px 0 0 0;
     margin: 0 auto;
     position: relative;
 
@@ -17,7 +17,7 @@
         text-align: center;
         padding-top: 8px;
         padding-bottom: 20px;
-        width: 654px;
+        width: 600px;
         min-height: 124px;
         margin-bottom: 30px;
 
@@ -29,7 +29,7 @@
             content: '';
             background: url('../img/large-title-icons.png') no-repeat scroll 0 0;
             position: absolute;
-            left: 300px;
+            left: 265px;
         }
 
         &:before {
@@ -94,11 +94,14 @@
         }
     }
 
-    .social {
+    .cta-suggest {
         text-align: center;
+        margin-bottom: 0;
 
-        p {
-            margin-bottom: 0;
+        a,
+        a:visited {
+            @extend .font-josefin-bold-italic;
+            color:#fff;
         }
     }
 }
