@@ -414,6 +414,9 @@ header {
       margin: 60px 0 0 -3px; }
     .info-circle p.draw {
       margin: 75px 0 0 -3px; }
+    .info-circle p.score {
+      font-size: 50px;
+      margin-top: 60px; }
   .info-circle .winner {
     font-size: 16px;
     display: block;
@@ -507,23 +510,30 @@ header {
       border-bottom: 1px solid #ccc;
       float: left;
       clear: both;
-      width: 320px;
+      width: 308px;
       height: 39px;
-      position: relative; }
+      position: relative;
+      background-color: #fff;
+      padding: 0 6px; }
       #player1 .card ul li {
         cursor: pointer; }
       #player1 .card ul li:hover {
-        background-color: #f2b235;
-        padding: 0 12px;
-        width: 296px; }
+        background-color: #f2b235; }
       #player2 .card ul li:hover {
         background-color: #fa7a90; }
+      .card ul li.selected {
+        background-color: #ccc;
+        -webkit-transition: background-color 1s;
+        -moz-transition: background-color 1s;
+        -ms-transition: background-color 1s;
+        -o-transition: background-color 1s;
+        transition: background-color 1s; }
       .card ul li span {
         position: absolute;
         top: 6px;
         font-size: 19px; }
       .card ul li .stat-val {
-        right: 0; }
+        right: 6px; }
   .card .card-back {
     background: url("../img/card-back.jpg") no-repeat scroll 0 0;
     width: 340px;

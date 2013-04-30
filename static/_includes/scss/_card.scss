@@ -84,9 +84,11 @@
 			border-bottom: 1px solid #ccc;
 			float: left;
 			clear: both;
-			width: 320px;
+			width: 308px;
 			height: 39px;
 			position: relative;
+			background-color:#fff;
+			padding:0 6px;
 
 			#player1 & {
 				cursor: pointer;
@@ -94,12 +96,17 @@
 
 			#player1 &:hover {
 				background-color: #f2b235;
-				padding: 0 12px;
-				width: 296px;
+				//padding: 0 12px;
+				//width: 296px;
 			}
 
 			#player2 &:hover {
 				background-color: #fa7a90;
+			}
+
+			&.selected {
+				background-color:#ccc;
+				@include transition(background-color 1s);
 			}
 
 			span {
@@ -109,7 +116,7 @@
 			}
 
 			.stat-val {
-				right: 0;
+				right: 6px;
 			}
 
 		}

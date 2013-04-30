@@ -117,17 +117,20 @@ WT.startRound = function(){
 
             $playerStats.on('click', function(e){
 
+                var $selected = $(this);
+
                 $playerStats.off('click');
 
-                var stat = $(this).find('.stat').text();
+                // highlight selected stat
+                //$selected.addClass('selected');
+                var index = $selected.index();
 
                 //Show other players card
-                if(player === WT.player1){
-                    WT.showCardFront(WT.player2);
-                }else{
-                    WT.showCardFront(WT.player1);
-                }
-                WT.compareCards(stat);
+                WT.showCardFront(nonPlayer);
+
+                // compare stats
+                var stat = $selected.find('.stat').text();
+                WT.compareCards(stat, index);
             });
         }
 
@@ -196,8 +199,7 @@ WT.updateInfoCircle = function(state){
 /**
 * Display a card
 */
-WT.showCardFront = function(player){
-
+WT.showCardFront = function(player, index){
 
     player.el.find('.card-back').remove();
 
@@ -215,7 +217,6 @@ WT.showCardFront = function(player){
     });
 
     player.el.append(output);
-
 };
 
 
@@ -231,24 +232,41 @@ WT.makeAIChoice = function(){
     var choices = _.clone(WT.currentPlayer.cards[0].stats);
     var result;
     var count = 0;
-    for (var prop in choices)
-        if (Math.random() < 1/++count)
+    var selected;
+    for (var prop in choices) {
+        if (Math.random() < 1/++count) {
            result = prop;
+           selected = count-1;
+        }
+    }
 
-    WT.compareCards(result);
+    if(WT.settings.debug) {
+        console.log("AI selected: ", result, selected);
+    }
+
+    var nonPlayer = WT.getNonPlayingPlayer();
+    WT.showCardFront(nonPlayer);
+    WT.compareCards(result, selected);
 };
 
 
 /**
 * Compare card values to see who wins
 */
-WT.compareCards = function(stat){
+WT.compareCards = function(stat, index){
 
     var winner,
         draw = false;
 
     var player1Value = parseInt(WT.player1.cards[0].stats[stat], 10);
     var player2Value = parseInt(WT.player2.cards[0].stats[stat], 10);
+
+    // highlight selected stats
+    if (index !== undefined) {
+        WT.player1.el.find('li:eq('+index+')').addClass('selected');
+        WT.player2.el.find('li:eq('+index+')').addClass('selected');
+    }
+
 
     //Just incase we need different comparitors.
     switch(stat){
@@ -267,8 +285,9 @@ WT.compareCards = function(stat){
     }
 
 
-    if(WT.settings.debug)
+    if(WT.settings.debug) {
         console.log('Player 1: '+ player1Value , 'Player 2: '+ player2Value);
+    }
 
     if(draw){
         WT.updateInfoCircle('draw').done(WT.showScores);
@@ -352,7 +371,7 @@ WT.countdownToNewRound = function(){
             clearInterval(interVal);
             if(WT.settings.debug){
                 console.log('starting new round');
-                WT.debugCards();
+                //WT.debugCards();
             }
             WT.startRound();
         }else if(count > timeout - 5){
