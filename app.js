@@ -94,6 +94,7 @@ wTrumps.getTwitterFollows = function(callback){
         callback(null);
       } else {
         console.log("Twitter error: ", error);
+        callback();
       }
     });
 };
@@ -112,9 +113,10 @@ wTrumps.getLinkedInConnections = function(callback){
         if (!error && response.statusCode == 200) {
           var $ = cheerio.load(body);
           wTrumps.updateWeblebrityStat(task.url, 'linkedin', $('dd.overview-connections strong').text());
-           callback();
+          callback();
         } else {
-          console.log("Linkedin error: ", error);
+          console.log("Linkedin error for: ", task.webleb, ": ", error);
+          callback();
         }
       });
   }, 10);
@@ -128,6 +130,7 @@ wTrumps.getLinkedInConnections = function(callback){
     if(!_.isEmpty(weblebrity.accounts.linkedin) && !_.isUndefined(weblebrity.accounts.linkedin)){
         var task = {};
         task.url = weblebrity.accounts.linkedin;
+        task.webleb = weblebrity.name;
         reqQueue.push(task);
     }
   });
@@ -148,7 +151,8 @@ wTrumps.getGithubRepos = function(callback){
           wTrumps.updateWeblebrityStat(task.github, 'github', body.public_repos);
           callback();
         } else {
-          console.log("Github error: ", error);
+          console.log("Github error for ", task.github, ": ", error);
+          callback();
         }
       });
   }, 10);
@@ -183,9 +187,10 @@ wTrumps.getLanyrdConferenceSpoken = function(callback){
           var $ = cheerio.load(body);
 
           wTrumps.updateWeblebrityStat(task.lanyrd, 'lanyrd', $($('p.number-feature a strong')[0]).text());
-           callback();
+          callback();
         } else {
-          console.log("Lanyrd error: ", error);
+          console.log("Lanyrd error for ", task.lanyrd, ": ", error);
+          callback();
         }
       });
   }, 10);

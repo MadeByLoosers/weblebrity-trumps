@@ -111,7 +111,8 @@
         "No.": "13",
         "Name": "Ade Rowbotham",
         "Twitter": "_ade",
-        "LinkedIn": "10744812",
+        "LinkedIn": "",
+        "LinkedInId": "10744812",
         "Github": "aderowbotham",
         "Lanyrd": "_ade",
         "id": 12
@@ -129,7 +130,8 @@
         "No.": "15",
         "Name": "Lea Verou",
         "Twitter": "LeaVerou",
-        "LinkedIn": "40474952",
+        "LinkedIn": "",
+        "LinkedInId": "40474952",
         "Github": "LeaVerou",
         "Lanyrd": "LeaVerou",
         "id": 14
@@ -147,7 +149,8 @@
         "No.": "17",
         "Name": "Johnathon Snook",
         "Twitter": "snookca",
-        "LinkedIn": "211762214",
+        "LinkedIn": "",
+        "LinkedInId": "211762214",
         "Github": "snookca",
         "Lanyrd": "snookca",
         "id": 16
@@ -156,7 +159,8 @@
         "No.": "18",
         "Name": "Cameron Moll",
         "Twitter": "cameronmoll",
-        "LinkedIn": "335003",
+        "LinkedIn": "",
+        "LinkedInId": "335003",
         "Github": "cameronmoll",
         "Lanyrd": "cameronmoll",
         "id": 17
@@ -165,7 +169,8 @@
         "No.": "19",
         "Name": "Jeffrey Zeldman",
         "Twitter": "zeldman",
-        "LinkedIn": "17438",
+        "LinkedIn": "",
+        "LinkedInId": "17438",
         "Github": "zeldman",
         "Lanyrd": "zeldman",
         "id": 18
@@ -174,7 +179,8 @@
         "No.": "20",
         "Name": "Eric Meyer",
         "Twitter": "meyerweb",
-        "LinkedIn": "87440",
+        "LinkedIn": "",
+        "LinkedInId": "87440",
         "Github": "ericmeyer",
         "Lanyrd": "meyerweb",
         "id": 19
@@ -183,7 +189,8 @@
         "No.": "21",
         "Name": "Brian Hoff",
         "Twitter": "behoff",
-        "LinkedIn": "26983440",
+        "LinkedIn": "",
+        "LinkedInId": "26983440",
         "Github": "behoff",
         "Lanyrd": "behoff",
         "id": 20
@@ -192,7 +199,8 @@
         "No.": "22",
         "Name": "Vitaly Friedman",
         "Twitter": "vitalyf",
-        "LinkedIn": "8614404",
+        "LinkedIn": "",
+        "LinkedInId": "8614404",
         "Github": "vitalyf",
         "Lanyrd": "vitalyf",
         "id": 21
@@ -201,7 +209,8 @@
         "No.": "23",
         "Name": "John Resig",
         "Twitter": "jeresig",
-        "LinkedIn": "2115224",
+        "LinkedIn": "",
+        "LinkedInId": "2115224",
         "Github": "jeresig",
         "Lanyrd": "jeresig",
         "id": 22
