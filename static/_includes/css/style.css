@@ -503,7 +503,9 @@ header {
     position: relative; }
     .card .bio p {
       width: 150px;
-      overflow: hidden; }
+      overflow: hidden;
+      margin: 0;
+      padding: 0; }
   .card .card-details {
     position: absolute;
     top: 120px;
