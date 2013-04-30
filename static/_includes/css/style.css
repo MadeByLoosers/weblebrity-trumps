@@ -282,11 +282,18 @@ header {
 
 #main {
   width: 910px;
-  margin: 35px auto 50px;
+  margin: 25px auto 50px;
   position: relative; }
   #main .player {
     float: left;
     width: 380px; }
+    #main .player .score-heading {
+      font-size: 28px;
+      margin: 0 0 20px 0;
+      line-height: 1;
+      color: #ccc; }
+    #main .player .score {
+      color: #fff; }
     #main .player#player1 {
       margin-right: 70px; }
     #main .player#player2 {
@@ -337,14 +344,16 @@ header {
   .big-circle p {
     width: 510px;
     margin: 0 auto 15px;
-    line-height: 28px; }
+    font-size: 18px;
+    line-height: 28px;
+    text-align: center; }
   .big-circle .controls {
     text-align: center;
     margin-bottom: 20px; }
     .big-circle .controls h3 {
       margin: 0 0 10px 0;
       padding: 0;
-      font-size: 14px; }
+      font-size: 28px; }
     .big-circle .controls .button {
       width: 181px;
       height: 47px;
@@ -391,11 +400,11 @@ header {
     color: #000;
     width: 100%;
     text-align: center;
-    font-size: 70px;
-    margin: 40px 0 0 -6px;
+    font-size: 60px;
+    margin: 50px 0 0 -6px;
     text-transform: uppercase; }
     .info-circle p.vs {
-      margin: 50px 0 0 -8px;
+      margin: 55px 0 0 -8px;
       letter-spacing: -6px; }
     .info-circle p.game-on {
       font-size: 25px;
@@ -431,7 +440,26 @@ header {
   padding: 30px 8px 35px 8px;
   display: block;
   background: #fff no-repeat scroll 0 0;
-  height: 530px; }
+  height: 530px;
+  /*
+  	p.bio:before {
+  		content:open-quote;
+  		font-size:72px;
+  		color:#999;
+  		position:absolute;
+  		left:0px;
+  		top:-10px;
+  	}
+  
+  	p.bio:after {
+  		content:close-quote;
+  		font-size:72px;
+  		color:#999;
+  		position:absolute;
+  		right:0px;
+  		top:-10px;
+  	}
+  */ }
   .card .portrait {
     margin-top: 31px;
     margin-left: 102px; }
@@ -446,12 +474,25 @@ header {
     line-height: 40px;
     margin-bottom: 10px; }
   .card img {
-    margin-left: 22px;
+    float: left;
+    margin: 0 22px;
     border-color: #fff;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px; }
+  .card p.bio {
+    float: left;
+    width: 150px;
+    height: 160px;
+    padding: 5px 0px;
+    font-size: 14px;
+    font-style: italic;
+    overflow: hidden;
+    margin: 0;
+    color: #000;
+    position: relative; }
   .card ul {
+    clear: both;
     color: #000;
     margin: 26px 20px 0 20px;
     padding: 0;

@@ -32,14 +32,47 @@
 	}
 
 	img {
-    	margin-left: 22px;
+    	float:left;
+    	margin:0 22px;
     	border-color: #fff;
     	-webkit-border-radius: 8px;
 		-moz-border-radius: 8px;
 		border-radius: 8px;
 	}
 
+	p.bio {
+		float:left;
+		width:150px;
+		height:160px;
+		padding:5px 0px;
+		font-size:14px;
+		font-style:italic;
+		overflow:hidden;
+		margin:0;
+		color:#000;
+		position:relative;
+	}
+/*
+	p.bio:before {
+		content:open-quote;
+		font-size:72px;
+		color:#999;
+		position:absolute;
+		left:0px;
+		top:-10px;
+	}
+
+	p.bio:after {
+		content:close-quote;
+		font-size:72px;
+		color:#999;
+		position:absolute;
+		right:0px;
+		top:-10px;
+	}
+*/
 	ul {
+		clear:both;
 		color: #000;
 		margin: 26px 20px 0 20px;
 		padding: 0;
@@ -107,7 +140,7 @@
 
 			#player1 & {
 				background: url('../img/card-back-p1-arrows.png') no-repeat scroll center 0;
-			}			
+			}
 
 			#player2 & {
 				background: url('../img/card-back-p2-arrows.png') no-repeat scroll center 0;

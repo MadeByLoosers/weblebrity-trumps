@@ -1,6 +1,6 @@
 /* _base.standard.scss */
-html { 
-	
+html {
+
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -22,7 +22,7 @@ h2 {
 
 header {
 	height: 174px;
-	width: 100%;	
+	width: 100%;
 	margin:0 auto;
 	position: relative;
 	background: url('../img/top_grad.jpg') no-repeat center top;
@@ -39,7 +39,7 @@ header {
 			margin: 0 auto;
 			clear: both;
 			overflow: hidden;
-		
+
 			.lockup {
 				width: 161px;
 				height: 143px;
@@ -64,17 +64,28 @@ header {
 		}
 
 
-	
+
 }
 
 #main {
 	width: 910px;
-	margin: 35px auto 50px;
+	margin: 25px auto 50px;
 	position: relative;
 
 	.player {
 		float: left;
 		width: 380px;
+
+		.score-heading {
+			font-size:28px;
+			margin:0 0 20px 0;
+			line-height:1;
+			color:#ccc;
+		}
+
+		.score {
+			color:#fff;
+		}
 
 		&#player1 {
 			margin-right: 70px;

@@ -11,6 +11,8 @@ WT.settings = {
 //Stuff for later
 WT.weblebrities = [];
 WT.$mainEl = {};
+WT.$player1HeadScore = {};
+WT.$player2HeadScore = {};
 WT.player1 = { name: 'Player1', cards: [], el: {}, isAI:false };
 WT.player2 = { name: 'Player2', cards: [], el: {}, isAI:true };
 WT.players = [WT.player1, WT.player2];
@@ -64,19 +66,22 @@ WT.setUpGame = function(){
             WT.player2.name = 'Player 2 (AI)';
         }
 
+        //Divide up cards
+        WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
+        WT.player2.cards = _.rest(WT.weblebrities, WT.cardsEach);
+
         //Add player divs
         $start.remove();
-        var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1}));
-        var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2}));
+        var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1, score:WT.player1.cards.length}));
+        var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2, score:WT.player2.cards.length}));
         WT.$mainEl.append($playerOneEl);
         WT.$mainEl.append($playerTwoEl);
 
         WT.player1.el = $playerOneEl.find('.card');
         WT.player2.el = $playerTwoEl.find('.card');
 
-        //Divide up cards
-        WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
-        WT.player2.cards = _.rest(WT.weblebrities, WT.cardsEach);
+        WT.$player1HeadScore = WT.$mainEl.find('#player1 .score-heading');
+        WT.$player2HeadScore = WT.$mainEl.find('#player2 .score-heading');
 
         //Start Rounds
         WT.startRound(WT.currentPlayer);
@@ -198,7 +203,11 @@ WT.showCardFront = function(player){
 
     var card = player.cards[0];
 
-    var output = $(_.template(WT.templates.cardFront, {name: card.name, twitterName: card.accounts.twitter }));
+    var output = $(_.template(WT.templates.cardFront, {
+            name: card.name,
+            twitterName: card.accounts.twitter,
+            bio: card.bio
+        }));
 
     _.each(card.stats, function(value, key){
         var stat = {name: key, value: value};
@@ -278,8 +287,9 @@ WT.compareCards = function(stat){
         }
     }
 
-    if(WT.settings.debug)
+    if(WT.settings.debug) {
         console.log('Winner: ' + winner.name);
+    }
 
     WT.currentPlayer = winner;
 
@@ -295,7 +305,33 @@ WT.compareCards = function(stat){
 WT.showScores = function(){
     _.delay(function(){
         WT.updateInfoCircle('score');
+        WT.updateScoreHeadings();
     }, 1000);
+};
+
+WT.updateScoreHeadings = function() {
+    var p1score = WT.player1.cards.length,
+        p2score = WT.player2.cards.length,
+        $p1scoreEl = WT.$player1HeadScore.find('.score'),
+        $p2scoreEl = WT.$player2HeadScore.find('.score'),
+        $p1pluralEl = WT.$player1HeadScore.find('.plural'),
+        $p2pluralEl = WT.$player2HeadScore.find('.plural');
+
+
+    $p1scoreEl.html(p1score);
+    $p2scoreEl.html(p2score);
+
+    if (p1score === 1) {
+        $p1pluralEl.addClass('hidden');
+    } else {
+        $p1pluralEl.removeClass('hidden');
+    }
+
+    if (p2score === 1) {
+        $p2pluralEl.addClass('hidden');
+    } else {
+        $p2pluralEl.removeClass('hidden');
+    }
 };
 
 
