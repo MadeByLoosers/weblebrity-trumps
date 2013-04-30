@@ -1,6 +1,6 @@
 # Weblebrity Trumps
 
-A gamification of Weblebrities, based on social media and internet proliferation.
+Like a who’s who of the information superhighway websphere, Weblebrity Trumps turns the web's elite into a gamification experience based on social media and internet proliferation.
 
 ## Front end
 
