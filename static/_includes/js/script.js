@@ -247,7 +247,6 @@ WT.compareCards = function(stat){
         case 'linkedin':
         case 'github':
         case 'lanyrd':
-        case 'facebook':
             //Higher value wins.
             if(player1Value > player2Value){
                 winner = WT.player1;
