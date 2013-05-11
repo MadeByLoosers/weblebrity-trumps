@@ -9,8 +9,6 @@ var util = require("util"),
     moment = require('moment'),
     wTrumps = {}; //Main object
 
-var twitterProfileImageUrl = 'https://api.twitter.com/1/users/profile_image?screen_name=<%= twitterName %>&size=original';
-
 /**
 * Get all the weblebrities
 * Connect from
