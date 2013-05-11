@@ -68,6 +68,11 @@ WT.showSuggest = function(event){
     WT.$start.find('.suggest').off('click');
     WT.$suggest.find('.cancel').on('click', WT.hideSuggest);
     WT.$suggest.find('.suggest-submit').on('click', WT.submitSuggest);
+    WT.$suggest.find('#webleb-suggest').on('keydown', function(event) {
+        if (event.keyCode == 13) {
+            WT.submitSuggest(event);
+        }
+    });
 };
 
 
@@ -91,7 +96,7 @@ WT.submitSuggest = function(event){
             var $thanks = $("<p/>")
                 .addClass("thanks")
                 .text("Thanks! Why not add another?");
-            $thanks.insertAfter($(event.target));
+            $thanks.insertAfter(WT.$suggest.find('.suggest-submit'));
         }
 
         $input.val("@");
