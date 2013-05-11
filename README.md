@@ -4,16 +4,26 @@ Like a who’s who of the information superhighway websphere, Weblebrity Trumps 
 
 ## Front end
 
-To view the front-end of the site, set up a new virtual host with */static* as the root directory.
-
-To update the CSS you need [SASS](http://sass-lang.com) (SCSS) installed.
-
-To update the CSS automatically when you change the SCSS files, navigate to the */static/_includes/* directory through terminal, and run the
-command:
+Grunt is used to run a developemt server on port 9000 and watch sass files for compilation. Install grunt-cli:
 
 ```
-sass --watch scss:css
+npm install -g grunt-cli
 ```
+More info on getting started with grunt [http://gruntjs.com/getting-started](http://gruntjs.com/getting-started)
+
+And then install dependancies:
+
+```
+npm install
+```
+
+Then just run grunt:
+
+```
+grunt
+```
+
+Visit localhost:9000 to view the site.
 
 
 ## Updating script
