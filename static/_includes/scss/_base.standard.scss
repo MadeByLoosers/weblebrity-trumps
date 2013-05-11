@@ -69,12 +69,31 @@ header {
 				margin:0 0 20px 0;
 				line-height:1;
 				color:#ccc;
-				text-align:left;
+				text-align:center;
+				font-style: italic;
+				font-weight: normal;
+				width: 280px;
+				padding-top: 8px;
 
 				&.player-2-score {
 					left:auto;
-					right:0;
-					text-align:right;
+					right:0;					
+				}
+
+				.score-player{
+					font-size: 18px;
+					line-height: 20px;
+				}
+
+				.score-score{
+					font-size: 55px;
+					font-weight: bold;
+					line-height: 35px;
+				}
+
+				.score-remaining{
+					display: block;
+					font-size: 15px;
 				}
 			}
 		}

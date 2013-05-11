@@ -45,9 +45,9 @@ WT.templates.playerTemplate = '<div class="player" id="player<%= number %>">' +
 
 
 WT.templates.scoreTemplate = '<h2 class="score-heading player-<%= number %>-score">' +
-                                'P<%= number %>: ' +
-                                '<span class="score"><%= score %></span>' +
-                                ' card<span class="plural">s</span> remaining' +
+                                '<span class="score-player">P<%= number %>:</span> ' +
+                                '<span class="score-score"><%= score %></span>' +
+                                '<span class="score-remaining">Card<span class="plural">s</span> remaining</span>' +
                             '</h2>';
 
 
