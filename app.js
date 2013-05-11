@@ -9,6 +9,8 @@ var util = require("util"),
     moment = require('moment'),
     wTrumps = {}; //Main object
 
+var GUNT_USER_AGENT = 'Weblebrity Trumps. A Gunt London Production: canyoumakeourlogobigger@guntlondon.com';
+
 /**
 * Get all the weblebrities
 * Connect from
@@ -145,8 +147,10 @@ wTrumps.getGithubRepos = function(callback){
 
   var reqQueue = async.queue(function(task, callback){
 
-      request({url:task.url, json:true}, function(error, response, body){
+      request({url:task.url, json:true, headers: { 'User-Agent': GUNT_USER_AGENT}}, function(error, response, body){
+
         if (!error && response.statusCode == 200) {
+
           wTrumps.updateWeblebrityStat(task.github, 'github', body.public_repos);
           callback();
         } else {
