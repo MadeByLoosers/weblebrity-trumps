@@ -197,22 +197,12 @@
     },
     {
         "No.": "22",
-        "Name": "Vitaly Friedman",
-        "Twitter": "vitalyf",
-        "LinkedIn": "",
-        "LinkedInId": "8614404",
-        "Github": "vitalyf",
-        "Lanyrd": "vitalyf",
-        "id": 21
-    },
-    {
-        "No.": "23",
         "Name": "John Resig",
         "Twitter": "jeresig",
         "LinkedIn": "",
         "LinkedInId": "2115224",
         "Github": "jeresig",
         "Lanyrd": "jeresig",
-        "id": 22
+        "id": 21
     }
 ]
