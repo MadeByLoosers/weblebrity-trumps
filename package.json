@@ -9,11 +9,9 @@
     "request": "2.9.203",
     "xml2js": "0.1.14",
     "async": "0.1.22",
-    "cheerio":"0.8.3"
+    "cheerio": "0.8.3",
+    "moment": "~2.0.0"
   },
-  "bundleDependencies": [
-    "node-google-spreadsheets"
-  ],
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
