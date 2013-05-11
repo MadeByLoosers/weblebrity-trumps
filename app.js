@@ -1,5 +1,4 @@
-var GoogleSpreadsheets = require("node-google-spreadsheets"),
-    util = require("util"),
+var util = require("util"),
     request = require("request"),
     async = require('async'),
     _ = require('underscore'),
@@ -9,6 +8,8 @@ var GoogleSpreadsheets = require("node-google-spreadsheets"),
     http = require('http'),
     moment = require('moment'),
     wTrumps = {}; //Main object
+
+var twitterProfileImageUrl = 'https://api.twitter.com/1/users/profile_image?screen_name=<%= twitterName %>&size=original';
 
 /**
 * Get all the weblebrities
@@ -88,7 +89,7 @@ wTrumps.getTwitterFollows = function(callback){
       if (!error && response.statusCode == 200) {
         _.each(body, function(user){
           wTrumps.updateWeblebrityStat(user.screen_name, 'twitter', user.followers_count);
-          wTrumps.updateBio(user.screen_name, 'twitter', user.description);
+          wTrumps.updateBio(user.screen_name, 'twitter', user.description);         
           wTrumps.saveImage(user.screen_name, 'twitter', user.profile_image_url);
         });
         callback(null);
@@ -247,6 +248,9 @@ wTrumps.saveImage = function(accountName, type, imgUrl){
   _.each(wTrumps.weblebrities, function(item, index){
     if(item.accounts[type] == accountName){
       var fileName, ext, file, request;
+
+      //remove _normal to try get the large image
+      imgUrl = imgUrl.replace('_normal', '');
 
       // get file extension/name
       ext = imgUrl.split('.').pop();
