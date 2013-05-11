@@ -263,7 +263,8 @@ header {
     color: #fff;
     text-decoration: none; }
   header .headerinner {
-    width: 663px;
+    position: relative;
+    width: 800px;
     margin: 0 auto;
     clear: both;
     overflow: hidden; }
@@ -280,20 +281,28 @@ header {
         text-align: right; }
       header .headerinner .header-cta.suggest {
         text-align: left; }
+    header .headerinner .score-heading {
+      position: absolute;
+      left: 0;
+      top: 20px;
+      font-size: 28px;
+      margin: 0 0 20px 0;
+      line-height: 1;
+      color: #ccc;
+      text-align: left; }
+      header .headerinner .score-heading.player-2-score {
+        left: auto;
+        right: 0;
+        text-align: right; }
 
 #main {
   width: 910px;
-  margin: 25px auto 50px;
+  margin: 70px auto 50px;
   position: relative;
   z-index: 1; }
   #main .player {
     float: left;
     width: 380px; }
-    #main .player .score-heading {
-      font-size: 28px;
-      margin: 0 0 20px 0;
-      line-height: 1;
-      color: #ccc; }
     #main .player .score {
       color: #fff; }
     #main .player#player1 {

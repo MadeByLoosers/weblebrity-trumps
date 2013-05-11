@@ -40,13 +40,16 @@ WT.templates.endTemplate = '<div id="end" class="big-circle">' +
 
 
 WT.templates.playerTemplate = '<div class="player" id="player<%= number %>">' +
-                                '<h2 class="score-heading">' +
-                                    'Player <%= number %>: ' +
-                                    '<span class="score"><%= score %></span>' +
-                                    ' card<span class="plural">s</span> remaining' +
-                                '</h2>' +
                                 '<div class="card clearfix"></div>' +
                             '</div>';
+
+
+WT.templates.scoreTemplate = '<h2 class="score-heading player-<%= number %>-score">' +
+                                'P<%= number %>: ' +
+                                '<span class="score"><%= score %></span>' +
+                                ' card<span class="plural">s</span> remaining' +
+                            '</h2>';
+
 
 WT.templates.cardFront = '<div class="card-front">'+
                             '<h2><%= name %></h2>'+

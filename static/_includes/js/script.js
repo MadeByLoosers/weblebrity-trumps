@@ -21,6 +21,7 @@ WT.$player2HeadScore = {};
 WT.init = function(){
 
     WT.$mainEl = $('#main');
+    WT.$headerEl = $('.headerinner');
 
     $.get('weblebrity-game-stats/latest.json', function(data){
         WT.weblebrities = data;
@@ -162,14 +163,18 @@ WT.startGame = function(event){
     //Add player divs
     var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1, score:WT.player1.cards.length}));
     var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2, score:WT.player2.cards.length}));
+    var $playerOneScoreEl = $(_.template(WT.templates.scoreTemplate, {number:1, score:WT.player1.cards.length}));
+    var $playerTwoScoreEl = $(_.template(WT.templates.scoreTemplate, {number:2, score:WT.player2.cards.length}));
     WT.$mainEl.append($playerOneEl);
     WT.$mainEl.append($playerTwoEl);
+    WT.$headerEl.append($playerOneScoreEl);
+    WT.$headerEl.append($playerTwoScoreEl);
 
     WT.player1.el = $playerOneEl.find('.card');
     WT.player2.el = $playerTwoEl.find('.card');
 
-    WT.$player1HeadScore = WT.$mainEl.find('#player1 .score-heading');
-    WT.$player2HeadScore = WT.$mainEl.find('#player2 .score-heading');
+    WT.$player1HeadScore = WT.$headerEl.find('.player-1-score');
+    WT.$player2HeadScore = WT.$headerEl.find('.player-2-score');
 
     //Start Rounds
     WT.startRound(WT.currentPlayer);

@@ -34,7 +34,8 @@ header {
 		}
 
 		.headerinner{
-			width: 663px;
+			position:relative;
+			width: 800px;
 			margin: 0 auto;
 			clear: both;
 			overflow: hidden;
@@ -59,28 +60,35 @@ header {
 					text-align: left;
 				}
 			}
+
+			.score-heading {
+				position:absolute;
+				left:0;
+				top:20px;
+				font-size:28px;
+				margin:0 0 20px 0;
+				line-height:1;
+				color:#ccc;
+				text-align:left;
+
+				&.player-2-score {
+					left:auto;
+					right:0;
+					text-align:right;
+				}
+			}
 		}
-
-
-
 }
 
 #main {
 	width: 910px;
-	margin: 25px auto 50px;
+	margin: 70px auto 50px;
 	position: relative;
 	z-index:1;
 
 	.player {
 		float: left;
 		width: 380px;
-
-		.score-heading {
-			font-size:28px;
-			margin:0 0 20px 0;
-			line-height:1;
-			color:#ccc;
-		}
 
 		.score {
 			color:#fff;
