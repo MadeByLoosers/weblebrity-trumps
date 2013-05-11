@@ -1,3 +1,12 @@
+#start {
+    z-index:1;
+}
+
+#suggest {
+    z-index:2;
+    display:none;
+}
+
 
 .big-circle {
     width: 600px;
@@ -6,7 +15,8 @@
     background: url('../img/large-circle.png') no-repeat scroll 0 0;
     padding: 100px 0 0 0;
     margin: 0 auto;
-    position: relative;
+    position: absolute;
+    left:155px;
 
     h2 {
         text-transform: uppercase;
@@ -103,6 +113,30 @@
             @extend .font-josefin-bold-italic;
             color:#fff;
         }
+    }
+
+    input[type=text] {
+        @extend .font-josefin-bold-italic;
+        padding:10px;
+        border:none;
+        font-size:18px;
+        border-radius:5px;
+        box-shadow: 2px 2px rgba(0,0,0,0.1);
+
+    }
+
+    input[type=text]:focus {
+        outline:none;
+    }
+
+    .button.suggest-submit {
+        display:block;
+        margin:20px auto;
+    }
+
+    .cancel {
+        color:#fff;
+        font-style:italic;
     }
 }
 

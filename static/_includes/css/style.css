@@ -215,7 +215,7 @@ td {
   padding: 0.2em 0; }
 
 /* _base.typography.scss */
-.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, .font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .card h2 {
+.josefin, .font-josefin, .font-josefin-italic, .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body, .font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .big-circle input[type=text], .card h2 {
   font-family: 'Josefin Slab', "Times New Roman", Times, serif; }
 
 .font-josefin, .font-josefin-italic {
@@ -230,10 +230,10 @@ td {
 .font-josefin-semi-bold-italic {
   font-style: italic; }
 
-.font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .card h2 {
+.font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .big-circle input[type=text], .card h2 {
   font-weight: 700; }
 
-.font-josefin-bold-italic, header a, .big-circle .cta-suggest a {
+.font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .big-circle input[type=text] {
   font-style: italic; }
 
 /* _base.standard.scss */
@@ -301,6 +301,13 @@ header {
     #main .player#player2 {
       margin-left: 70px; }
 
+#start {
+  z-index: 1; }
+
+#suggest {
+  z-index: 2;
+  display: none; }
+
 .big-circle {
   width: 600px;
   height: 502px;
@@ -308,7 +315,8 @@ header {
   background: url("../img/large-circle.png") no-repeat scroll 0 0;
   padding: 100px 0 0 0;
   margin: 0 auto;
-  position: relative; }
+  position: absolute;
+  left: 155px; }
   .big-circle h2 {
     text-transform: uppercase;
     font-size: 24px;
@@ -376,6 +384,20 @@ header {
     .big-circle .cta-suggest a,
     .big-circle .cta-suggest a:visited {
       color: #fff; }
+  .big-circle input[type=text] {
+    padding: 10px;
+    border: none;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.1); }
+  .big-circle input[type=text]:focus {
+    outline: none; }
+  .big-circle .button.suggest-submit {
+    display: block;
+    margin: 20px auto; }
+  .big-circle .cancel {
+    color: #fff;
+    font-style: italic; }
 
 .info-circle {
   width: 187px;

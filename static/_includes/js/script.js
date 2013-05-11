@@ -46,49 +46,116 @@ WT.init = function(){
 WT.setUpGame = function(){
 
     //Present player choice
-    var $start = $(WT.templates.startTemplate);
-    WT.$mainEl.append($start);
+    WT.$start = $(WT.templates.startTemplate);
+    WT.$mainEl.append(WT.$start);
 
-    WT.$mainEl.on('click', '.button', function(event){
+    WT.$start.find('.button').on('click', WT.startGame);
+    WT.$start.find('.suggest').on('click', WT.showSuggest);
+};
 
-        event.preventDefault();
-        WT.$mainEl.off('click');
 
-        //What player did we click on?
-        var data = $(this).data();
+/**
+* Show suggest
+*/
+WT.showSuggest = function(event){
 
-        //Update Player objects
-        if(data.players === 2){
-            WT.player2.isAI = false;
-            WT.player2.name = 'Player 2';
-        }else{
-            WT.player2.isAI = true;
-            WT.player2.name = 'Player 2 (AI)';
+    event.preventDefault();
+
+    WT.$suggest = $(WT.templates.suggestTemplate);
+    WT.$mainEl.append(WT.$suggest);
+    WT.$suggest.fadeIn();
+
+    WT.$start.find('.suggest').off('click');
+    WT.$suggest.find('.cancel').on('click', WT.hideSuggest);
+    WT.$suggest.find('.suggest-submit').on('click', WT.submitSuggest);
+};
+
+
+/**
+* Submit suggest
+*/
+WT.submitSuggest = function(event){
+
+    event.preventDefault();
+
+    var $input = WT.$suggest.find('#webleb-suggest');
+    var suggestion = $input.val();
+
+    if (suggestion.length > 0) {
+
+        $.post("http://dev.f90.co.uk/gunt/webleb-mailer/", { suggestion: suggestion }, function(data) {
+            //data will always be null
+        });
+
+        if (WT.$suggest.find('.thanks').length < 1) {
+            var $thanks = $("<p/>")
+                .addClass("thanks")
+                .text("Thanks! Why not add another?");
+            $thanks.insertAfter($(event.target));
         }
 
-        //Divide up cards
-        WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
-        WT.player2.cards = _.rest(WT.weblebrities, WT.cardsEach);
+        $input.val("@");
+    }
+};
 
-        //Add player divs
-        $start.remove();
-        var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1, score:WT.player1.cards.length}));
-        var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2, score:WT.player2.cards.length}));
-        WT.$mainEl.append($playerOneEl);
-        WT.$mainEl.append($playerTwoEl);
 
-        WT.player1.el = $playerOneEl.find('.card');
-        WT.player2.el = $playerTwoEl.find('.card');
+/**
+* Hide suggest
+*/
+WT.hideSuggest = function(event){
 
-        WT.$player1HeadScore = WT.$mainEl.find('#player1 .score-heading');
-        WT.$player2HeadScore = WT.$mainEl.find('#player2 .score-heading');
+    event.preventDefault();
 
-        //Start Rounds
-        WT.startRound(WT.currentPlayer);
-        WT.updateScores();
-
+    WT.$suggest.find('.cancel').off('click');
+    WT.$start.find('.suggest').on('click', WT.showSuggest);
+    WT.$suggest.fadeOut(250, function(){
+        WT.$suggest.remove();
     });
 };
+
+
+/**
+* Start a game
+*/
+WT.startGame = function(event){
+
+    event.preventDefault();
+    WT.$mainEl.off('click');
+
+    //What player did we click on?
+    var data = $(this).data();
+
+    //Update Player objects
+    if(data.players === 2){
+        WT.player2.isAI = false;
+        WT.player2.name = 'Player 2';
+    }else{
+        WT.player2.isAI = true;
+        WT.player2.name = 'Player 2 (AI)';
+    }
+
+    //Divide up cards
+    WT.player1.cards = _.first(WT.weblebrities, WT.cardsEach);
+    WT.player2.cards = _.rest(WT.weblebrities, WT.cardsEach);
+
+    //Add player divs
+    WT.$start.remove();
+    var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1, score:WT.player1.cards.length}));
+    var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2, score:WT.player2.cards.length}));
+    WT.$mainEl.append($playerOneEl);
+    WT.$mainEl.append($playerTwoEl);
+
+    WT.player1.el = $playerOneEl.find('.card');
+    WT.player2.el = $playerTwoEl.find('.card');
+
+    WT.$player1HeadScore = WT.$mainEl.find('#player1 .score-heading');
+    WT.$player2HeadScore = WT.$mainEl.find('#player2 .score-heading');
+
+    //Start Rounds
+    WT.startRound(WT.currentPlayer);
+    WT.updateScores();
+};
+
 
 /**
 * Start a game Round
