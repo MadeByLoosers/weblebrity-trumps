@@ -113,7 +113,7 @@ wTrumps.getLinkedInConnections = function(callback){
       request(task.url, function(error, response, body){
         if (!error && response.statusCode == 200) {
           var $ = cheerio.load(body);
-          wTrumps.updateWeblebrityStat(task.url, 'linkedin', $('dd.overview-connections strong').text());
+          wTrumps.updateWeblebrityStat(task.url, 'linkedin', parseInt($('dd.overview-connections strong').text(), 10));
           callback();
         } else {
           console.log("Linkedin error for: ", task.webleb, ": ", error);
@@ -189,7 +189,7 @@ wTrumps.getLanyrdConferenceSpoken = function(callback){
         if (!error && response.statusCode == 200) {
           var $ = cheerio.load(body);
 
-          wTrumps.updateWeblebrityStat(task.lanyrd, 'lanyrd', $($('p.number-feature a strong')[0]).text());
+          wTrumps.updateWeblebrityStat(task.lanyrd, 'lanyrd', parseInt($($('p.number-feature a strong')[0]).text()),10);
           callback();
         } else {
           console.log("Lanyrd error for ", task.lanyrd, ": ", error);
