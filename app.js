@@ -147,7 +147,16 @@ wTrumps.getGithubRepos = function(callback){
 
   var reqQueue = async.queue(function(task, callback){
 
-      request({url:task.url, json:true, headers: { 'User-Agent': GUNT_USER_AGENT}}, function(error, response, body){
+      request({
+              url:task.url,
+              json:true,
+              headers: { 'User-Agent': GUNT_USER_AGENT},
+              'auth': {
+                      'user': 'GuntOps',
+                      'pass': 'tPvdo7wETSHRce2H',
+                      'sendImmediately': false
+                      }},
+        function(error, response, body){
 
         if (!error && response.statusCode == 200) {
 
