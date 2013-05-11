@@ -13,13 +13,6 @@ WT.weblebrities = [];
 WT.$mainEl = {};
 WT.$player1HeadScore = {};
 WT.$player2HeadScore = {};
-WT.player1 = { name: 'Player1', number: 1, oppositeNumber: 2, cards: [], el: {}, isAI:false };
-WT.player2 = { name: 'Player2', number: 2, oppositeNumber: 1, cards: [], el: {}, isAI:true };
-WT.players = [WT.player1, WT.player2];
-
-//Always start with first player
-WT.currentPlayer = WT.player1;
-
 
 
 /**
@@ -40,17 +33,37 @@ WT.init = function(){
 };
 
 /**
-* Ask the user if its one or two players
+* Ask the user if it's one or two players
 * Setup players
 */
 WT.setUpGame = function(){
 
     //Present player choice
     WT.$start = $(WT.templates.startTemplate);
+    WT.$end = $(WT.templates.endTemplate);
+    WT.$suggest = $(WT.templates.suggestTemplate);
+
     WT.$mainEl.append(WT.$start);
 
     WT.$start.find('.button').on('click', WT.startGame);
     WT.$start.find('.suggest').on('click', WT.showSuggest);
+};
+
+/*
+ * set up players
+ */
+WT.setUpPlayers = function() {
+
+    WT.weblebrities = _.shuffle(WT.weblebrities);
+    WT.cardsEach = Math.floor(WT.weblebrities.length / 2);
+
+    WT.player1 = { name: 'Player1', number: 1, oppositeNumber: 2, cards: [], el: {}, isAI:false };
+    WT.player2 = { name: 'Player2', number: 2, oppositeNumber: 1, cards: [], el: {}, isAI:true };
+
+    WT.players = [WT.player1, WT.player2];
+
+    //Always start with first player
+    WT.currentPlayer = WT.player1;
 };
 
 
@@ -61,11 +74,9 @@ WT.showSuggest = function(event){
 
     event.preventDefault();
 
-    WT.$suggest = $(WT.templates.suggestTemplate);
     WT.$mainEl.append(WT.$suggest);
     WT.$suggest.fadeIn();
 
-    WT.$start.find('.suggest').off('click');
     WT.$suggest.find('.cancel').on('click', WT.hideSuggest);
     WT.$suggest.find('.suggest-submit').on('click', WT.submitSuggest);
     WT.$suggest.find('#webleb-suggest').on('keydown', function(event) {
@@ -127,6 +138,11 @@ WT.startGame = function(event){
     event.preventDefault();
     WT.$mainEl.off('click');
 
+    WT.$start.remove();
+    WT.$end.remove();
+
+    WT.setUpPlayers();
+
     //What player did we click on?
     var data = $(this).data();
 
@@ -144,7 +160,6 @@ WT.startGame = function(event){
     WT.player2.cards = _.rest(WT.weblebrities, WT.cardsEach);
 
     //Add player divs
-    WT.$start.remove();
     var $playerOneEl = $(_.template(WT.templates.playerTemplate, {number:1, score:WT.player1.cards.length}));
     var $playerTwoEl = $(_.template(WT.templates.playerTemplate, {number:2, score:WT.player2.cards.length}));
     WT.$mainEl.append($playerOneEl);
@@ -158,7 +173,6 @@ WT.startGame = function(event){
 
     //Start Rounds
     WT.startRound(WT.currentPlayer);
-    WT.updateScores();
 };
 
 
@@ -201,7 +215,7 @@ WT.startRound = function(){
                 WT.showCardFront(nonPlayer);
 
                 // compare stats
-                var stat = $selected.find('.stat').text();
+                var stat = $selected.find('.stat').text().toLowerCase();
                 WT.compareCards(stat, index);
             });
         }
@@ -284,7 +298,7 @@ WT.showCardFront = function(player, index){
         }));
 
     _.each(card.stats, function(value, key){
-        var stat = {name: key, value: value};
+        var stat = {name: capitaliseFirstLetter(key), value: value};
         output.find('ul').append(_.template(WT.templates.statTemplate, stat));
     });
 
@@ -363,7 +377,7 @@ WT.compareCards = function(stat, index){
     }
 
     if(draw){
-        WT.updateInfoCircle('draw').done(WT.showScores);
+        WT.updateInfoCircle('draw').done(WT.updateScoreHeadings);
         WT.player1.cards.push(WT.player1.cards.shift()); // put current card to back of the stack
         WT.player2.cards.push(WT.player2.cards.shift());
         winner = WT.currentPlayer;
@@ -371,11 +385,11 @@ WT.compareCards = function(stat, index){
         if(winner === WT.player1){
             WT.player1.cards.push(WT.player1.cards.shift());
             WT.player1.cards.push(WT.player2.cards.shift());
-            WT.updateInfoCircle('player1win').done(WT.showScores);
+            WT.updateInfoCircle('player1win').done(WT.updateScoreHeadings);
         }else{
             WT.player2.cards.push(WT.player2.cards.shift());
             WT.player2.cards.push(WT.player1.cards.shift());
-            WT.updateInfoCircle('player2win').done(WT.showScores);
+            WT.updateInfoCircle('player2win').done(WT.updateScoreHeadings);
         }
     }
 
@@ -385,7 +399,7 @@ WT.compareCards = function(stat, index){
 
     WT.currentPlayer = winner;
 
-    if(WT.player1.cards.length <= 0 && WT.player2.cards.length <= 0){
+    if(WT.player1.cards.length <= 0 || WT.player2.cards.length <= 0){
         WT.endGame();
     }else{
         WT.countdownToNewRound();
@@ -393,13 +407,6 @@ WT.compareCards = function(stat, index){
 
 };
 
-
-WT.showScores = function(){
-    _.delay(function(){
-        WT.updateInfoCircle('score');
-        WT.updateScoreHeadings();
-    }, 1000);
-};
 
 WT.updateScoreHeadings = function() {
     var p1score = WT.player1.cards.length,
@@ -454,22 +461,41 @@ WT.countdownToNewRound = function(){
     }, 1000);
 };
 
-/**
-* Update scores
-*/
-WT.updateScores = function(){
-    // $('header .score').html(WT.player1.cards.length + ' v ' + WT.player2.cards.length);
-};
 
 /**
 *
 */
 WT.endGame = function(){
-    // if(WT.player1.cards.length <= 0){
-    //  $('header .message').html('Player 2 is the winner!');
-    // }else{
-    //  $('header .message').html('Player 1 is the winner!');
-    // }
+
+    var large, medium;
+
+    if(WT.player1.cards.length <= 0){
+        if (!!WT.player2.isAI) {
+            large = 'You lose!';
+            medium = 'Better luck next time...';
+        } else {
+            large = 'Player 2';
+            medium = 'Wins!';
+        }
+    } else {
+        if (!!WT.player2.isAI) {
+            large = 'You win';
+            medium = 'You know your weblebrities!';
+        } else {
+            large = 'Player 1';
+            medium = 'Wins!';
+        }
+    }
+
+    WT.$end.find('.large').text(large);
+    WT.$end.find('.medium').text(medium);
+
+    WT.infoCircle = null;
+    WT.$mainEl.empty();
+    WT.$mainEl.append(WT.$end);
+
+    WT.$end.find('.button').on('click', WT.startGame);
+    WT.$end.find('.suggest').on('click', WT.showSuggest);
 };
 
 WT.getNonPlayingPlayer = function(){
@@ -518,7 +544,14 @@ function getTransitionEndEventName(){
         'transition'       : 'transitionend'
     };
     return transEndEventNames[ Modernizr.prefixed('transition') ];
+}
 
+
+/*
+ * Ronseal...
+ */
+function capitaliseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 

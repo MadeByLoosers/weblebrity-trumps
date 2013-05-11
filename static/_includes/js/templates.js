@@ -25,6 +25,19 @@ WT.templates.suggestTemplate = '<div id="suggest" class="big-circle">' +
                                 '</div>' +
                             '</div>';
 
+WT.templates.endTemplate = '<div id="end" class="big-circle">' +
+                                '<h2><span class="large"></span><span class="medium"></span></h2>' +
+                                '<p>Why not play again?</p>' +
+                                '<div class="controls">' +
+                                    '<h3>Play</h3>' +
+                                    '<a href="" class="button start first" data-players="1">1 Player</a>' +
+                                    '<a href="" class="button start" data-players="2">VS</a>' +
+                                '</div>' +
+                                '<p class="cta-suggest">' +
+                                    '<a class="suggest" href="">SUGGEST A WEBLEBRITY</a>' +
+                                '</p>' +
+                            '</div>';
+
 
 WT.templates.playerTemplate = '<div class="player" id="player<%= number %>">' +
                                 '<h2 class="score-heading">' +

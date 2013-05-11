@@ -18,11 +18,11 @@
 		@extend .font-josefin-bold;
 		text-transform: uppercase;
 		color:#000;
-		line-height: 40px;
+		line-height: 35px;
 		font-size: 38px;
 		text-align: center;
 		margin: 0;
-		padding: 0;
+		padding: 0 15px;
 		display:table-cell;
 		vertical-align:middle;
 		height:100px;
@@ -93,6 +93,7 @@
 		bottom:50px;
 		color: #000;
 		margin: 26px 20px 0 20px;
+		border-top: 1px solid #ccc;
 		padding: 0;
 		list-style: none;
 		float: left;
@@ -129,7 +130,7 @@
 
 			span {
 				position: absolute;
-				top: 6px;
+				top: 8px;
 				font-size: 19px;
 			}
 

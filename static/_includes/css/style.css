@@ -225,13 +225,13 @@ td {
   font-style: italic; }
 
 .font-josefin-semi-bold, .font-josefin-semi-bold-italic, body {
-  font-weight: 600; }
+  font-weight: 500; }
 
 .font-josefin-semi-bold-italic {
   font-style: italic; }
 
 .font-josefin-bold, .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .big-circle input[type=text], .card h2 {
-  font-weight: 700; }
+  font-weight: 600; }
 
 .font-josefin-bold-italic, header a, .big-circle .cta-suggest a, .big-circle input[type=text] {
   font-style: italic; }
@@ -291,7 +291,7 @@ header {
     width: 380px; }
     #main .player .score-heading {
       font-size: 28px;
-      margin: 0 0 20px 0;
+      margin: 0;
       line-height: 1;
       color: #ccc; }
     #main .player .score {
@@ -301,7 +301,8 @@ header {
     #main .player#player2 {
       margin-left: 70px; }
 
-#start {
+#start,
+#end {
   z-index: 1; }
 
 #suggest {
@@ -375,7 +376,7 @@ header {
       display: inline-block;
       text-decoration: none;
       color: #000;
-      padding-top: 5px; }
+      padding-top: 8px; }
       .big-circle .controls .button.first {
         margin-right: 20px; }
   .big-circle .cta-suggest {
@@ -493,11 +494,11 @@ header {
   .card h2 {
     text-transform: uppercase;
     color: #000;
-    line-height: 40px;
+    line-height: 35px;
     font-size: 38px;
     text-align: center;
     margin: 0;
-    padding: 0;
+    padding: 0 15px;
     display: table-cell;
     vertical-align: middle;
     height: 100px;
@@ -537,6 +538,7 @@ header {
     bottom: 50px;
     color: #000;
     margin: 26px 20px 0 20px;
+    border-top: 1px solid #ccc;
     padding: 0;
     list-style: none;
     float: left; }
@@ -569,7 +571,7 @@ header {
         transition: background-color 1s; }
       .card ul.stats li span {
         position: absolute;
-        top: 6px;
+        top: 8px;
         font-size: 19px; }
       .card ul.stats li .stat-val {
         right: 6px; }
