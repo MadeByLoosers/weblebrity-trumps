@@ -291,7 +291,7 @@ header {
     width: 380px; }
     #main .player .score-heading {
       font-size: 28px;
-      margin: 0;
+      margin: 0 0 20px 0;
       line-height: 1;
       color: #ccc; }
     #main .player .score {
