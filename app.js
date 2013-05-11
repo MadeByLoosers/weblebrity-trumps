@@ -7,9 +7,11 @@ var util = require("util"),
     fs = require('fs'),
     http = require('http'),
     moment = require('moment'),
+    credentials = require('./node_credentials'),
     wTrumps = {}; //Main object
 
 var GUNT_USER_AGENT = 'Weblebrity Trumps. A Gunt London Production: canyoumakeourlogobigger@guntlondon.com';
+
 
 /**
 * Get all the weblebrities
@@ -152,8 +154,8 @@ wTrumps.getGithubRepos = function(callback){
               json:true,
               headers: { 'User-Agent': GUNT_USER_AGENT},
               'auth': {
-                      'user': 'GuntOps',
-                      'pass': 'tPvdo7wETSHRce2H',
+                      'user': credentials.githubAccount.user,
+                      'pass': credentials.githubAccount.pass,
                       'sendImmediately': false
                       }},
         function(error, response, body){

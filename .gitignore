@@ -24,3 +24,5 @@ Thumbs.db
 !/static/weblebrity-profile-images/.gitignore
 /static/weblebrity-game-stats/*
 !/static/weblebrity-game-stats/.gitignore
+
+node_credentials.js
