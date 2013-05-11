@@ -26,6 +26,19 @@ In terminal navigate to the root of the site and run:
 npm install
 ```
 
+You need to update the github login credentials with your github API details.
+
+Create a file in the root called *node_credentials.js* (or symlink one in) and enter:
+
+```
+var exports;
+exports.githubAccount = {
+    'user': '[username]',
+    'pass': '[password]'
+};
+module.exports = exports;
+```
+
 Then start the information gathering with:
 
 ```
