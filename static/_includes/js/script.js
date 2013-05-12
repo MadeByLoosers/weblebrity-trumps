@@ -5,7 +5,7 @@
 var WT = WT || {};
 WT.settings = {
     roundTimeout: 5, //seconds between rounds,
-    debug: true
+    debug: false
 };
 
 //Stuff for later
@@ -186,46 +186,51 @@ WT.startGame = function(event){
 */
 WT.startRound = function(){
 
-    WT.player2.el.html('');
-    WT.player1.el.html('');
+    if(WT.player1.cards.length <= 0 || WT.player2.cards.length <= 0){
+        WT.endGame();
+    } else {
 
-    var player = WT.currentPlayer;
-    WT.showCardFront(player);
+        WT.player2.el.html('');
+        WT.player1.el.html('');
 
-    var nonPlayer = WT.getNonPlayingPlayer();
-    WT.showCardBack(nonPlayer);
+        var player = WT.currentPlayer;
+        WT.showCardFront(player);
 
-    WT.updateInfoCircle('vs').done(function(){
+        var nonPlayer = WT.getNonPlayingPlayer();
+        WT.showCardBack(nonPlayer);
 
-        // Wait for token to flip back to VS
+        WT.updateInfoCircle('vs').done(function(){
 
-        if(player.isAI){
-            //Make a choice
-            setTimeout(WT.makeAIChoice, 1000);
-        }else{
+            // Wait for token to flip back to VS
 
-            var $playerStats = player.el.find('li');
+            if(player.isAI){
+                //Make a choice
+                setTimeout(WT.makeAIChoice, 1000);
+            }else{
 
-            $playerStats.on('click', function(e){
+                var $playerStats = player.el.find('li');
 
-                var $selected = $(this);
+                $playerStats.on('click', function(e){
 
-                $playerStats.off('click');
+                    var $selected = $(this);
 
-                // highlight selected stat
-                //$selected.addClass('selected');
-                var index = $selected.index();
+                    $playerStats.off('click');
 
-                //Show other players card
-                WT.showCardFront(nonPlayer);
+                    // highlight selected stat
+                    //$selected.addClass('selected');
+                    var index = $selected.index();
 
-                // compare stats
-                var stat = $selected.find('.stat').text().toLowerCase();
-                WT.compareCards(stat, index);
-            });
-        }
+                    //Show other players card
+                    WT.showCardFront(nonPlayer);
 
-    });
+                    // compare stats
+                    var stat = $selected.find('.stat').text().toLowerCase();
+                    WT.compareCards(stat, index);
+                });
+            }
+
+        });
+    }
 };
 
 
@@ -404,20 +409,15 @@ WT.compareCards = function(stat, index){
 
     WT.currentPlayer = winner;
 
-    if(WT.player1.cards.length <= 0 || WT.player2.cards.length <= 0){
-        WT.endGame();
-    }else{
-        WT.countdownToNewRound();
-    }
-
+    WT.countdownToNewRound();
 };
 
 
 WT.updateScoreHeadings = function() {
     var p1score = WT.player1.cards.length,
         p2score = WT.player2.cards.length,
-        $p1scoreEl = WT.$player1HeadScore.find('.score'),
-        $p2scoreEl = WT.$player2HeadScore.find('.score'),
+        $p1scoreEl = WT.$player1HeadScore.find('.score-score'),
+        $p2scoreEl = WT.$player2HeadScore.find('.score-score'),
         $p1pluralEl = WT.$player1HeadScore.find('.plural'),
         $p2pluralEl = WT.$player2HeadScore.find('.plural');
 
@@ -497,6 +497,8 @@ WT.endGame = function(){
 
     WT.infoCircle = null;
     WT.$mainEl.empty();
+    WT.$player1HeadScore.remove();
+    WT.$player2HeadScore.remove();
     WT.$mainEl.append(WT.$end);
 
     WT.$end.find('.button').on('click', WT.startGame);
