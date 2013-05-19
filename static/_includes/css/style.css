@@ -436,6 +436,9 @@ header {
   -moz-transform: rotateX(0deg) rotateY(0deg);
   -moz-transform-style: preserve-3d;
   -moz-backface-visibility: hidden;
+  transform: rotateX(0deg) rotateY(0deg);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
   /* -- transition is the magic sauce for animation -- */
   -ms-transition: all 0.8s ease-in-out;
   -moz-transition: all 0.8s ease-in-out;
@@ -473,9 +476,13 @@ header {
     padding: 0;
     letter-spacing: 0px; }
   .info-circle.flip {
-    -webkit-transform: rotateY(180deg); }
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg); }
   .info-circle.flip90 {
-    -webkit-transform: rotateY(0deg); }
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    transform: rotateY(0deg); }
   .info-circle.no-transitions {
     -webkit-transition: none;
     -moz-transition: none;
@@ -554,7 +561,8 @@ header {
   .card .card-details {
     position: absolute;
     top: 120px;
-    left: 0; }
+    left: 0;
+    right: 0; }
   .card ul.stats {
     position: absolute;
     bottom: 50px;

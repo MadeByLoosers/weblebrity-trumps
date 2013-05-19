@@ -1,7 +1,7 @@
 #start,
 #end {
     z-index:1;
-    
+
 }
 
 #suggest {
@@ -161,6 +161,10 @@
     -moz-transform-style: preserve-3d;
     -moz-backface-visibility: hidden;
 
+    transform: rotateX(0deg) rotateY(0deg);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+
     /* -- transition is the magic sauce for animation -- */
     -ms-transition:     all 0.8s ease-in-out;
     -moz-transition:    all 0.8s ease-in-out;
@@ -217,10 +221,14 @@
 
     &.flip {
         -webkit-transform: rotateY(180deg);
+        -moz-transform: rotateY(180deg);
+        transform: rotateY(180deg);
     }
 
     &.flip90 {
         -webkit-transform: rotateY(0deg);
+        -moz-transform: rotateY(0deg);
+        transform: rotateY(0deg);
     }
 
     &.no-transitions {

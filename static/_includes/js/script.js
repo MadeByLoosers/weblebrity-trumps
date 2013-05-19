@@ -245,9 +245,12 @@ WT.updateInfoCircle = function(state){
         WT.infoCircle = WT.$mainEl.find('.info-circle');
     }
 
-    WT.infoCircle.on(getTransitionEndEventName(), function(event){
+    var transitionEnd = getTransitionEndEventName();
+    console.log(transitionEnd);
 
-        WT.infoCircle.off(getTransitionEndEventName());
+    WT.infoCircle.on(transitionEnd, function(event){
+
+        WT.infoCircle.off(transitionEnd);
 
         var content = '';
 
@@ -272,10 +275,10 @@ WT.updateInfoCircle = function(state){
 
         WT.infoCircle.html(content);
 
-        WT.infoCircle.on(getTransitionEndEventName(), function(event){
+        WT.infoCircle.on(transitionEnd, function(event){
 
             dfd.resolve();
-            WT.infoCircle.off(getTransitionEndEventName());
+            WT.infoCircle.off(transitionEnd);
         });
 
         _.delay(function () {
