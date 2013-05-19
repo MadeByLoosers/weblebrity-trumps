@@ -246,7 +246,6 @@ WT.updateInfoCircle = function(state){
     }
 
     var transitionEnd = getTransitionEndEventName();
-    console.log(transitionEnd);
 
     WT.infoCircle.on(transitionEnd, function(event){
 
