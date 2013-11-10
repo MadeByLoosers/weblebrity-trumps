@@ -8,7 +8,7 @@ var util = require("util"),
     http = require('http'),
     moment = require('moment'),
     credentials = require('./node_credentials'),
-    mtwitter = require('mtwitter'),
+    twitter = require('simple-twitter'),
     wTrumps = {}; //Main object
 
 var GUNT_USER_AGENT = 'Weblebrity Trumps. A Gunt London Production: canyoumakeourlogobigger@guntlondon.com';
@@ -76,36 +76,44 @@ wTrumps.getWeblebrities = function(callback){
 wTrumps.getTwitterFollows = function(callback){
   winston.info('Getting twitter followers');
 
-  var twit = new mtwitter({
-      consumer_key: credentials.twitterAccount.consumerKey,
-      consumer_secret: credentials.twitterAccount.consumerSecret,
-      access_token_key: credentials.twitterAccount.accessTokenKey,
-      access_token_secret: credentials.twitterAccount.accessTokenSecret
-  });
+  var twit = new twitter(credentials.twitterAccount.consumerKey, 
+                        credentials.twitterAccount.consumerSecret,
+                        credentials.twitterAccount.accessTokenKey,
+                        credentials.twitterAccount.accessTokenSecret);
 
   var names = [];
-    _.each(wTrumps.weblebrities, function(weblebrity){
+  _.each(wTrumps.weblebrities, function(weblebrity){
 
-      if(weblebrity.accounts.twitter !== '') {
-        names.push(weblebrity.accounts.twitter);
-      }
-    });
+    if(weblebrity.accounts.twitter !== '') {
+      names.push(weblebrity.accounts.twitter);
+    }
+  });
 
-    var url = "/users/lookup.json?screen_name="+names.join(',');
+  var url = "/users/lookup.json?screen_name=" + names.join(',');
 
     //@todo: Request can only handle 100 users. Maybe split into multiple requests if too long here.
 
-    twit.get(url,  function (error, data) {
+  twit.get(url, function (error, data) {
       if (!error) {
+
+        data = JSON.parse(data);
+
+        var imageSaveQueue = async.queue(wTrumps.saveImage, 5);
+
+        imageSaveQueue.drain = function(){
+          console.log('All images saved');
+          callback(null);
+        };
+
         _.each(data, function(user){
           wTrumps.updateWeblebrityStat(user.screen_name, 'twitter', user.followers_count);
           wTrumps.updateBio(user.screen_name, 'twitter', user.description);
-          wTrumps.saveImage(user.screen_name, 'twitter', user.profile_image_url);
+          imageSaveQueue.push({screen_name: user.screen_name, service: 'twitter', url: user.profile_image_url})
+      
         });
-        callback(null);
       } else {
         console.log("Twitter error: ", error);
-        callback();
+        callback(true);
       }
     });
 };
@@ -265,37 +273,37 @@ wTrumps.updateBio = function(accountName, type, value){
 * Save image
 * params: accountName (username), value (value for service)
 **/
-wTrumps.saveImage = function(accountName, type, imgUrl){
-  _.each(wTrumps.weblebrities, function(item, index){
-    if(item.accounts[type] == accountName){
-      var fileName, ext, file, request;
+wTrumps.saveImage = function(item, callback){
 
-      //remove _normal to try get the large image
-      imgUrl = imgUrl.replace('_normal', '');
+  var accountName = item.screen_name, 
+      type = item.service, 
+      imgUrl = item.url;
 
-      // get file extension/name
-      ext = imgUrl.split('.').pop();
-      fileName = accountName;// + "." + ext;
-
-      item.image = fileName;
-      wTrumps.weblebrities[index] = item;
-
-      // save image
-      request = http.get(imgUrl, function(res){
-        var imagedata = '';
-        res.setEncoding('binary');
-        res.on('data', function(chunk){
-            imagedata += chunk;
-        });
-        res.on('end', function(){
-            fs.writeFile("static/weblebrity-profile-images/"+fileName, imagedata, 'binary', function(err){
-                if (err) { throw err; }
-                console.log('Image file saved:', accountName);
-            });
-        });
-      });
-    }
+  //Find the webleb we want
+  var webleb = _.find(wTrumps.weblebrities, function(wl){
+    return wl.accounts[type] == accountName;
   });
+
+  //Find the webleb's index
+  var index = _.indexOf(wTrumps.weblebrities, webleb);
+
+  if(_.isEmpty(webleb)){
+    callback();
+  }
+
+  //remove _normal to try get the large image
+  imgUrl = imgUrl.replace('_normal', '');
+
+  // get file extension/name
+  var fileName = accountName;// + "." + ext;
+
+  webleb.image = fileName;
+  wTrumps.weblebrities[index] = webleb;
+
+  //Save to disk  
+  var req = request(imgUrl).pipe(fs.createWriteStream("static/weblebrity-profile-images/" + fileName));
+  req.on('finish', callback);
+
 };
 
 
