@@ -8,6 +8,7 @@ var util = require("util"),
     http = require('http'),
     moment = require('moment'),
     credentials = require('./node_credentials'),
+    mtwitter = require('mtwitter'),
     wTrumps = {}; //Main object
 
 var GUNT_USER_AGENT = 'Weblebrity Trumps. A Gunt London Production: canyoumakeourlogobigger@guntlondon.com';
@@ -75,6 +76,13 @@ wTrumps.getWeblebrities = function(callback){
 wTrumps.getTwitterFollows = function(callback){
   winston.info('Getting twitter followers');
 
+  var twit = new mtwitter({
+      consumer_key: credentials.twitterAccount.consumerKey,
+      consumer_secret: credentials.twitterAccount.consumerSecret,
+      access_token_key: credentials.twitterAccount.accessTokenKey,
+      access_token_secret: credentials.twitterAccount.accessTokenSecret
+  });
+
   var names = [];
     _.each(wTrumps.weblebrities, function(weblebrity){
 
@@ -83,15 +91,15 @@ wTrumps.getTwitterFollows = function(callback){
       }
     });
 
-    var url = "https://api.twitter.com/1/users/lookup.json?screen_name="+names.join(',');
+    var url = "/users/lookup.json?screen_name="+names.join(',');
 
     //@todo: Request can only handle 100 users. Maybe split into multiple requests if too long here.
 
-    request({url:url, json:true},  function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        _.each(body, function(user){
+    twit.get(url,  function (error, data) {
+      if (!error) {
+        _.each(data, function(user){
           wTrumps.updateWeblebrityStat(user.screen_name, 'twitter', user.followers_count);
-          wTrumps.updateBio(user.screen_name, 'twitter', user.description);         
+          wTrumps.updateBio(user.screen_name, 'twitter', user.description);
           wTrumps.saveImage(user.screen_name, 'twitter', user.profile_image_url);
         });
         callback(null);
@@ -267,7 +275,7 @@ wTrumps.saveImage = function(accountName, type, imgUrl){
 
       // get file extension/name
       ext = imgUrl.split('.').pop();
-      fileName = accountName + "." + ext;
+      fileName = accountName;// + "." + ext;
 
       item.image = fileName;
       wTrumps.weblebrities[index] = item;

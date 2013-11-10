@@ -54,7 +54,7 @@ WT.templates.scoreTemplate = '<h2 class="score-heading player-<%= number %>-scor
 WT.templates.cardFront = '<div class="card-front">'+
                             '<h2><%= name %></h2>'+
                             '<div class="card-details">'+
-                                '<img src="https://api.twitter.com/1/users/profile_image?screen_name=<%= twitterName %>&size=original" height="160px">'+
+                                '<img src="./weblebrity-profile-images/<%= twitterName %>" height="160px">'+
                                 '<% if (bio) { %><div class="bio"><p><%= bio %></p></div><% } %>'+
                             '</div>' +
                             '<ul class="stats"></ul>'+
