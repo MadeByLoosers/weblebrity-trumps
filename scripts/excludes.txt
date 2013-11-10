@@ -5,3 +5,5 @@ scripts/
 GruntFile.js
 package.json
 README.md
+static/weblebrity-profile-images/
+static/weblebrity-game-stats/
