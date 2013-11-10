@@ -25,6 +25,12 @@ grunt
 
 Visit localhost:9000 to view the site.
 
+## Deploying
+
+Use the deploy script!
+
+`cd /srv/www/git_weblebritytrumps/scripts && sudo sh deploy.sh`
+
 
 ## Updating script
 
