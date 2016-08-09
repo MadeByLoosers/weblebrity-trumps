@@ -23,7 +23,7 @@ WT.init = function(){
     WT.$mainEl = $('#main');
     WT.$headerEl = $('.headerinner');
 
-    $.get('weblebrity-game-stats/latest.json', function(data){
+    $.get('_includes/latest.json', function(data){
         WT.weblebrities = data;
         WT.weblebrities = _.shuffle(WT.weblebrities);
         WT.weblebrities = _.first(WT.weblebrities, 20);
