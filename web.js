@@ -15,7 +15,7 @@ app.use(express.static('static'));
 // });
 
 // Take port from argument if given
-var port = process.argv[2] || 8080;
+var port = process.env.PORT || 8080;
 
 app.listen(port, function () {
     console.log('SERVER LISTENING ON: ' + port);
